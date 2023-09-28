@@ -11,24 +11,4 @@
     "nav content";
 }
 
-.header {
-    grid-area: header;
-    background-color: burlywood;
-}
-.header img {
-    width: 55px;
-}
 
-.nav {
-    grid-area: nav;
-    background-color: blanchedalmond;
-}
-
-.content {
-    grid-area: content;
-    background-color: antiquewhite;
-
-}
-.content img {
-    width: 100%;
-}
