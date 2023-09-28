@@ -1,0 +1,9 @@
+.item {
+    color: darkcyan;
+}
+
+.item img {
+    width: 50px;
+    border: 1px solid olivedrab;
+    border-radius: 50%;
+}
