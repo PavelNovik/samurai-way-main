@@ -1,0 +1,12 @@
+.users {
+    width: 20%;
+    font-size: 25px;
+}
+
+.users li {
+    margin-bottom: 30px;
+}
+
+.users li a {
+    text-decoration: none;
+}

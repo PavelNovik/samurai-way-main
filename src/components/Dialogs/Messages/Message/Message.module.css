@@ -1,0 +1,16 @@
+.message {
+    margin-bottom: 30px;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #fae0c1;
+}
+
+.message img {
+    width: 50px;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+.message span {
+    font-weight: bold;
+}

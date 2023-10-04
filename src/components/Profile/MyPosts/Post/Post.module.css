@@ -7,3 +7,12 @@
     border: 1px solid olivedrab;
     border-radius: 50%;
 }
+.likes {
+    margin: 5px auto 5px 5px;
+    padding-left: 10px;
+    color: darkred;
+}
+.likes_title {
+    color: red;
+    font-size: 18px;
+}
