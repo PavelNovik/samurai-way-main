@@ -1,4 +1,6 @@
-.dialogs {}
+.dialogs {
+    grid-area: content;
+}
 
 .wrapper {
     display: flex;
