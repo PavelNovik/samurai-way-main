@@ -1,5 +1,7 @@
 .dialogs {}
 
 .wrapper {
-    display: flex;
+    /*display: flex;*/
+display: grid;
+    grid-template-columns: 2fr 7fr;
 }

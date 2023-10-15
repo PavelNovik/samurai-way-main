@@ -1,13 +1,14 @@
 import React from 'react';
 import s from './Users.module.css'
+import {NavLink} from "react-router-dom";
 
 const Users = () => {
     return (
         <ul className={s.users}>
-            <li><a href={"#"}>Andrew</a></li>
-            <li><a href={"#"}>Dmitry</a></li>
-            <li><a href={"#"}>Sasha</a></li>
-            <li><a href={"#"}>Sveta</a></li>
+            <li><NavLink to={"/dialogs/1"} activeClassName={s.active}>Andrew</NavLink></li>
+            <li><NavLink to={"/dialogs/2"} activeClassName={s.active}>Dmitry</NavLink></li>
+            <li><NavLink to={"/dialogs/3"} activeClassName={s.active}>Sasha</NavLink></li>
+            <li><NavLink to={"/dialogs/4"} activeClassName={s.active}>Sveta</NavLink></li>
         </ul>
     );
 };
