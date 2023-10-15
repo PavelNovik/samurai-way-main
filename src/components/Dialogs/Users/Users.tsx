@@ -3,12 +3,15 @@ import s from './Users.module.css'
 import {NavLink} from "react-router-dom";
 
 const Users = () => {
+    const users = ['Andrew', 'Dmitry', 'Sasha', 'Sveta', 'Viktor', 'Valera']
+
     return (
         <ul className={s.users}>
-            <li><NavLink to={"/dialogs/1"} activeClassName={s.active}>Andrew</NavLink></li>
-            <li><NavLink to={"/dialogs/2"} activeClassName={s.active}>Dmitry</NavLink></li>
-            <li><NavLink to={"/dialogs/3"} activeClassName={s.active}>Sasha</NavLink></li>
-            <li><NavLink to={"/dialogs/4"} activeClassName={s.active}>Sveta</NavLink></li>
+            {users.map((u, i) => {
+                return (
+                    <li key={i}><NavLink to={`/dialogs/${i + 1}`} activeClassName={s.active}>{u}</NavLink></li>
+                )
+            })}
         </ul>
     );
 };
