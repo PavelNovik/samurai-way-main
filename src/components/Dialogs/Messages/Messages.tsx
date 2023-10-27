@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {FC} from 'react';
 import Message from "./Message/Message";
 import s from "./Messages.module.css"
+import {MessagesType} from "../Dialogs";
 
-const Messages = () => {
+type MessagesPropsType = {
+    messages: MessagesType[]
+}
+const Messages: FC<MessagesPropsType> = ({messages}) => {
     return (
         <div className={s.messages}>
-            <Message/>
-            <Message/>
-            <Message/>
+            {messages.map(m => <Message key={m.id} message={m.message} avatar={m.src}/>)}
+
         </div>
     );
 };

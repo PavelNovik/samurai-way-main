@@ -1,15 +1,19 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from './Users.module.css'
 import {NavLink} from "react-router-dom";
+import {UsersType} from "../Dialogs";
 
-const Users = () => {
-    const users = ['Andrew', 'Dmitry', 'Sasha', 'Sveta', 'Viktor', 'Valera']
+type UserPropsType = {
+    users: UsersType[]
+}
+const Users: FC<UserPropsType> = ({users}) => {
+
 
     return (
         <ul className={s.users}>
-            {users.map((u, i) => {
+            {users.map((u) => {
                 return (
-                    <li key={i}><NavLink to={`/dialogs/${i + 1}`} activeClassName={s.active}>{u}</NavLink></li>
+                    <li key={u.id}><NavLink to={`/dialogs/${u.id}`} activeClassName={s.active}>{u.name}</NavLink></li>
                 )
             })}
         </ul>
