@@ -3,12 +3,11 @@ import Users from "./Users/Users";
 import Messages from "./Messages/Messages";
 import s from './Dialogs.module.css'
 
-import {MessagesType, UsersType} from "../../redux/state";
+import {MessagesPageType} from "../../redux/state";
 
 
 type DialogPropsType = {
-    users: UsersType[]
-    messages: MessagesType[]
+    state: MessagesPageType
 }
 const Dialogs = (props: DialogPropsType) => {
 
@@ -16,8 +15,8 @@ const Dialogs = (props: DialogPropsType) => {
         <div className={s.dialogs}>
             <h2>DIALOGS</h2>
             <div className={s.wrapper}>
-                <Users users={props.users}/>
-                <Messages messages={props.messages}/>
+                <Users users={props.state.users}/>
+                <Messages messages={props.state.messages}/>
             </div>
 
         </div>

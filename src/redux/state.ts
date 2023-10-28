@@ -12,15 +12,17 @@ export type PostsType = {
     message: string
     likes: number
 }
+export type MessagesPageType = {
+    users: UsersType[]
+    messages: MessagesType[]
+}
+export type ProfilePageType = {
+    posts: PostsType[]
+}
 
 export type StateType = {
-    messagesPage: {
-        users: UsersType[]
-        messages: MessagesType[]
-    }
-    profilePage: {
-        posts: PostsType[]
-    }
+    messagesPage: MessagesPageType
+    profilePage: ProfilePageType
 }
 
 export const state: StateType = {
