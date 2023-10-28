@@ -8,22 +8,31 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
+import {MessagesType, PostsType, UsersType} from "./index";
+
+type AppPropsType = {
+    users: UsersType[]
+    messages: MessagesType[]
+    posts: PostsType[]
+}
+
+function App(props: AppPropsType) {
 
 
-function App() {
     return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
                 <Header/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path={'/dialogs'} component={Dialogs}/>
-                    <Route path={'/profile'} component={Profile}/>
+                    {/*<Route path={'/profile'} component={Profile}/>*/}
+                    {/*<Route path={'/profile'} component={() => <Profile posts={props.posts}/>}/>*/}
+                    <Route path={'/profile'} render={() => <Profile posts={props.posts}/>}/>
+                    {/*<Route path={'/dialogs'} component={Dialogs}/>*/}
+                    <Route path={'/dialogs'} render={() => <Dialogs users={props.users} messages={props.messages}/>}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
                     <Route path={'/settings'} component={Settings}/>
-                    {/*<Profile/>*/}
-                    {/*<Dialogs/>*/}
                 </div>
             </div>
         </BrowserRouter>

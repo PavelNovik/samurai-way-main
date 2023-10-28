@@ -1,21 +1,21 @@
 import React, {FC} from 'react';
 import s from './Users.module.css'
 import {NavLink} from "react-router-dom";
-import {UsersType} from "../Dialogs";
+import {UsersType} from "../../../index";
 
 type UserPropsType = {
     users: UsersType[]
 }
 const Users: FC<UserPropsType> = ({users}) => {
-
+const usersList = users.map((u) => {
+    return (
+        <li key={u.id}><NavLink to={`/dialogs/${u.id}`} activeClassName={s.active}>{u.name}</NavLink></li>
+    )
+})
 
     return (
         <ul className={s.users}>
-            {users.map((u) => {
-                return (
-                    <li key={u.id}><NavLink to={`/dialogs/${u.id}`} activeClassName={s.active}>{u.name}</NavLink></li>
-                )
-            })}
+            {usersList}
         </ul>
     );
 };

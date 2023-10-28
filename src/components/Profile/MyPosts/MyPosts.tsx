@@ -1,12 +1,14 @@
 import React, {FC} from 'react';
 import styles from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import {PostsType} from "../Profile";
+import {PostsType} from "../../../index";
 
 type MyPostsPropsType = {
     posts: PostsType[]
 }
 const MyPosts: FC<MyPostsPropsType> = ({posts}) => {
+
+    const postsList = posts.map(p => <Post key={p.id} message={p.message} likes={p.likes}/>)
 
     return (
         <div>My posts
@@ -15,8 +17,7 @@ const MyPosts: FC<MyPostsPropsType> = ({posts}) => {
                 <button>Send</button>
             </div>
             <div className={styles.posts}>
-                {posts.map(p => <Post key={p.id} message={p.message} likes={p.likes}/>)}
-
+                {postsList}
             </div>
         </div>
     );
