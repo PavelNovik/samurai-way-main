@@ -8,7 +8,7 @@ type UserPropsType = {
     users: UsersType[]
 }
 const Users: FC<UserPropsType> = ({users}) => {
-    const usersList = users.map((u) => <li key={u.id}><NavLink to={`/dialogs/${u.id}`}
+    const usersList = users.map((u) => <li key={u.id}><img src={u.avatar} alt={'userAvatar'}/><NavLink to={`/dialogs/${u.id}`}
                                                                activeClassName={s.active}>{u.name}</NavLink></li>)
 
     return (

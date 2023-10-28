@@ -9,7 +9,7 @@ type MessagesPropsType = {
 }
 const Messages: FC<MessagesPropsType> = ({messages}) => {
 
-    const messagesList = messages.map(m => <Message key={m.id} message={m.message} avatar={m.src}/>)
+    const messagesList = messages.map(m => <Message key={m.id} message={m.message} avatar={m.src} isUser={m.isUser}/>)
     return (
         <div className={s.messages}>
             {messagesList}

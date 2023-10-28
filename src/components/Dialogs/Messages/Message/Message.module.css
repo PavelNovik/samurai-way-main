@@ -1,5 +1,17 @@
 .message {
+    display: flex;
+    align-items: center;
+    justify-content: left;
     margin-bottom: 30px;
+    gap: 10px;
+}
+.friend {
+    flex-direction: row-reverse;
+    justify-content: right;
+}
+
+.message div {
+    width: 70%;
     border: 1px solid black;
     padding: 10px;
     border-radius: 10px;
@@ -7,10 +19,11 @@
 }
 
 .message img {
-    width: 50px;
+    width: 70px;
     border-radius: 50%;
     border: 1px solid black;
 }
+
 .message span {
     font-weight: bold;
 }

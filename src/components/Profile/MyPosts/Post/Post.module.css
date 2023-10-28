@@ -1,5 +1,14 @@
 .item {
     color: darkcyan;
+    font-size: 20px;
+    margin-top: 20px;
+    padding-left: 20px;
+}
+.item div:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 10px;
 }
 
 .item img {
@@ -11,6 +20,7 @@
     margin: 5px auto 5px 5px;
     padding-left: 10px;
     color: darkred;
+    font-size: 15px;
 }
 .likes_title {
     color: red;

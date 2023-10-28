@@ -22,7 +22,7 @@ function App(props: AppPropsType) {
         <BrowserRouter>
             <div className={'app-wrapper'}>
                 <Header/>
-                <Navbar/>
+                <Navbar state={props.state.sidebar}/>
                 <div className="app-wrapper-content">
                     {/*<Route path={'/profile'} component={Profile}/>*/}
                     {/*<Route path={'/profile'} component={() => <Profile posts={props.posts}/>}/>*/}

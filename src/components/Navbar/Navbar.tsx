@@ -1,15 +1,23 @@
-import React from 'react';
+import React, {FC} from 'react';
 import S from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
+import { SidebarType} from "../../redux/state";
+import Users from "../Dialogs/Users/Users";
 
-const Navbar = () => {
+type NavbarPropsType = {
+    state: SidebarType
+}
+
+const Navbar: FC<NavbarPropsType> = ({state}) => {
+    const menuItems = state.menu.map(mi => <div key={mi.id} className={S.item}><NavLink to={mi.path}
+                                                                                        activeClassName={S.active}>{mi.title}</NavLink>
+    </div>)
+
+
     return (
         <nav className={S.nav}>
-            <div className={S.item}><NavLink to={'/profile'} activeClassName={S.active}>Profile</NavLink></div>
-            <div className={S.item}><NavLink to={'/dialogs'} activeClassName={S.active}>Messages</NavLink></div>
-            <div className={S.item}><NavLink to={'/news'} activeClassName={S.active}>News</NavLink></div>
-            <div className={S.item}><NavLink to={'/music'} activeClassName={S.active}>Music</NavLink></div>
-            <div className={S.item}><NavLink to={'/settings'} activeClassName={S.active}>Settings</NavLink></div>
+            {menuItems}
+            <Users users={state.friends}/>
         </nav>
     );
 };
