@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './ProfileInfo.module.css'
+
 const ProfileInfo = () => {
     return (
         <div className={s.profileInfo}>
@@ -12,7 +13,6 @@ const ProfileInfo = () => {
             </div>
         </div>
     )
-        ;
 };
 
 export default ProfileInfo;

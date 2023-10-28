@@ -1,7 +1,8 @@
 import React, {FC} from 'react';
 import Message from "./Message/Message";
 import s from "./Messages.module.css"
-import {MessagesType} from "../../../index";
+
+import {MessagesType} from "../../../redux/state";
 
 type MessagesPropsType = {
     messages: MessagesType[]
