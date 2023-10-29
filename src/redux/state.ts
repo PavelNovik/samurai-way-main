@@ -42,11 +42,27 @@ export type StateType = {
 export const state: StateType = {
     messagesPage: {
         users: [
-            {id: 1, name: 'Andrew', avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp3jjKg5GHVT7UFqTMbGFDYgNHkdjn1KWjncYzUVO452vdH4TswaAcfwWOfLZgevshtN8&usqp=CAU"},
+            {
+                id: 1,
+                name: 'Andrew',
+                avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp3jjKg5GHVT7UFqTMbGFDYgNHkdjn1KWjncYzUVO452vdH4TswaAcfwWOfLZgevshtN8&usqp=CAU"
+            },
             {id: 2, name: 'Dmitry', avatar: "https://oceanballoons.ru/content/photo/full/201804181640451.jpg"},
-            {id: 3, name: 'Sasha', avatar: "https://i.pinimg.com/originals/f3/af/3a/f3af3ab02e4ea2074d74c48770ed6784.png"},
-            {id: 4, name: 'Sveta', avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDhB7DwE6k6D4CyKJdRJsq8YPjD7ebmtENAaBwU9XZlNbK0eVq6tyUoBdN1Jg9bhq3Eak&usqp=CAU"},
-            {id: 5, name: 'Viktor', avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLCY_5-tzmuXbYnkbG9AGETzobPZjJcOwlhX4-K-5iiC1YteCANzrHeP3cqggtFnTqsg0&usqp=CAU"},
+            {
+                id: 3,
+                name: 'Sasha',
+                avatar: "https://i.pinimg.com/originals/f3/af/3a/f3af3ab02e4ea2074d74c48770ed6784.png"
+            },
+            {
+                id: 4,
+                name: 'Sveta',
+                avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDhB7DwE6k6D4CyKJdRJsq8YPjD7ebmtENAaBwU9XZlNbK0eVq6tyUoBdN1Jg9bhq3Eak&usqp=CAU"
+            },
+            {
+                id: 5,
+                name: 'Viktor',
+                avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLCY_5-tzmuXbYnkbG9AGETzobPZjJcOwlhX4-K-5iiC1YteCANzrHeP3cqggtFnTqsg0&usqp=CAU"
+            },
             {id: 6, name: 'Valera', avatar: "https://i.pinimg.com/236x/19/25/55/192555b6de984067f092206708913632.jpg"}
         ],
         messages: [
@@ -97,8 +113,25 @@ export const state: StateType = {
             {id: 4, title: 'Music', path: '/music'},
             {id: 5, title: 'Settings', path: '/settings'},
         ],
-        friends: [{id: 1, name: 'Andrew', avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp3jjKg5GHVT7UFqTMbGFDYgNHkdjn1KWjncYzUVO452vdH4TswaAcfwWOfLZgevshtN8&usqp=CAU"},
+        friends: [{
+            id: 1,
+            name: 'Andrew',
+            avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp3jjKg5GHVT7UFqTMbGFDYgNHkdjn1KWjncYzUVO452vdH4TswaAcfwWOfLZgevshtN8&usqp=CAU"
+        },
             {id: 2, name: 'Dmitry', avatar: "https://oceanballoons.ru/content/photo/full/201804181640451.jpg"},
-            {id: 3, name: 'Sasha', avatar: "https://i.pinimg.com/originals/f3/af/3a/f3af3ab02e4ea2074d74c48770ed6784.png"},]
+            {
+                id: 3,
+                name: 'Sasha',
+                avatar: "https://i.pinimg.com/originals/f3/af/3a/f3af3ab02e4ea2074d74c48770ed6784.png"
+            },]
     }
+}
+
+export const addPost = (postMessage: string) => {
+    const newPost: PostsType = {
+        id: 7,
+        message: postMessage,
+        likes: 0
+    }
+    state.profilePage.posts.push(newPost)
 }
