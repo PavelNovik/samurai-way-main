@@ -19,6 +19,7 @@ const MyPosts: FC<MyPostsPropsType> = ({posts, addPost}) => {
     const addNewPost = () => {
         const text = newPostElement.current as HTMLTextAreaElement
         addPost(text.value)
+        text.value = ''
     }
 
     return (
