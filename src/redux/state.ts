@@ -23,6 +23,7 @@ export type MessagesPageType = {
 }
 export type ProfilePageType = {
     posts: PostsType[]
+    newPostText: string
 }
 export type SidebarMenuType = {
     id: number
@@ -106,6 +107,7 @@ export const state: StateType = {
             {id: 2, message: "It's my first Post)", likes: 11},
             {id: 3, message: "It's my second Post)", likes: 3},
         ],
+        newPostText: 'new post text',
     },
     sidebar: {
         menu: [
@@ -129,13 +131,20 @@ export const state: StateType = {
     }
 }
 
-export const addPost = (postMessage: string) => {
+export const addPost = () => {
     const newPost: PostsType = {
         id: 7,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likes: 0
     }
     state.profilePage.posts.push(newPost)
+    // updateNewPostText('')
+    state.profilePage.newPostText = ''
+    rerenderEntireTree(state)
+
+}
+export const updateNewPostText = (postMessage: string) => {
+    state.profilePage.newPostText = postMessage
     rerenderEntireTree(state)
 
 }
