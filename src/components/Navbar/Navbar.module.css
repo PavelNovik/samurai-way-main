@@ -2,6 +2,9 @@
     grid-area: nav;
     background-color: blanchedalmond;
     padding: 20px 20px;
+    position: fixed;
+    height: 100vh;
+    margin-top: 65px;
 }
 .nav ul {
     display: flex;
