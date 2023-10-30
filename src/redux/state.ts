@@ -20,6 +20,7 @@ export type PostsType = {
 export type MessagesPageType = {
     users: UsersType[]
     messages: MessagesType[]
+    newMessageText: string
 
 }
 export type ProfilePageType = {
@@ -101,6 +102,7 @@ export const state: StateType = {
                 src: 'https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg'
             },
         ],
+        newMessageText: 'new message text'
     },
     profilePage: {
         posts: [
@@ -144,12 +146,30 @@ export const addPost = () => {
     rerenderEntireTree(state)
 
 }
+export const addMessage = () => {
+    const newMessage: MessagesType = {
+        id: 7,
+        message: state.messagesPage.newMessageText,
+        isUser: true,
+        src: 'https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg'
+    }
+    state.messagesPage.messages.push(newMessage)
+    // updateNewPostText('')
+    state.messagesPage.newMessageText = ''
+    rerenderEntireTree(state)
+
+}
 export const updateNewPostText = (postMessage: string) => {
     state.profilePage.newPostText = postMessage
     rerenderEntireTree(state)
 
 }
+export const updateNewMessageText = (message: string) => {
+    state.messagesPage.newMessageText = message
+    rerenderEntireTree(state)
 
-export const subscribe = (observer: (state: StateType)=>void) => {
+}
+
+export const subscribe = (observer: (state: StateType) => void) => {
     rerenderEntireTree = observer
 }

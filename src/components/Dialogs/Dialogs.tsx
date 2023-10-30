@@ -8,6 +8,8 @@ import {MessagesPageType} from "../../redux/state";
 
 type DialogPropsType = {
     state: MessagesPageType
+    addMessage: ()=> void
+    updateNewMessageText: (title: string) => void
 }
 const Dialogs = (props: DialogPropsType) => {
 
@@ -16,7 +18,7 @@ const Dialogs = (props: DialogPropsType) => {
             <h2>DIALOGS</h2>
             <div className={s.wrapper}>
                 <Users users={props.state.users}/>
-                <Messages messages={props.state.messages}/>
+                <Messages addMessage={props.addMessage} updateNewMessageText={props.updateNewMessageText} messages={props.state.messages} newMessageValue={props.state.newMessageText}/>
             </div>
 
         </div>

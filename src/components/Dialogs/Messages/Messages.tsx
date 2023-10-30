@@ -6,13 +6,19 @@ import {MessagesType} from "../../../redux/state";
 
 type MessagesPropsType = {
     messages: MessagesType[]
+    newMessageValue: string
+    addMessage: () => void
+    updateNewMessageText: (title: string) => void
 }
-const Messages: FC<MessagesPropsType> = ({messages}) => {
+const Messages: FC<MessagesPropsType> = ({messages, newMessageValue, addMessage, updateNewMessageText}) => {
     const ref = useRef<HTMLTextAreaElement>(null)
-    const userInput = ref.current as HTMLTextAreaElement
 
-    const addMessage = () => {
-        console.log(userInput.value)
+    const onChangeHandler = () => {
+        const userInput = ref.current as HTMLTextAreaElement
+        updateNewMessageText(userInput.value)
+    }
+    const addNewMessage = () => {
+        addMessage()
     }
 
     const messagesList = messages.map(m => <Message key={m.id} message={m.message} avatar={m.src} isUser={m.isUser}/>)
@@ -20,8 +26,8 @@ const Messages: FC<MessagesPropsType> = ({messages}) => {
         <div className={s.messages}>
             {messagesList}
             <div>
-                <textarea ref={ref} placeholder={'...your message'}/>
-                <button onClick={addMessage}>Send</button>
+                <textarea onChange={onChangeHandler} ref={ref} value={newMessageValue} placeholder={'...your message'}/>
+                <button onClick={addNewMessage}>Send</button>
             </div>
         </div>
     );
