@@ -9,14 +9,11 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 
-import {StateType} from "./redux/state";
+import {StateType, StoreType} from "./redux/state";
 
 type AppPropsType = {
+    store: StoreType
     state: StateType
-    addPost: () => void
-    addMessage: ()=> void
-    updateNewPostText: (title: string) => void
-    updateNewMessageText: (title: string) => void
 }
 
 function App(props: AppPropsType) {
@@ -31,9 +28,13 @@ function App(props: AppPropsType) {
                 {/*<Route path={'/profile'} component={Profile}/>*/}
                 {/*<Route path={'/profile'} component={() => <Profile posts={props.posts}/>}/>*/}
                 <Route path={'/profile'}
-                       render={() => <Profile addPost={props.addPost} updateNewPostText={props.updateNewPostText} state={props.state.profilePage}/>}/>
+                       render={() => <Profile addPost={props.store.addPost}
+                                              updateNewPostText={props.store.updateNewPostText}
+                                              state={props.state.profilePage}/>}/>
                 {/*<Route path={'/dialogs'} component={Dialogs}/>*/}
-                <Route path={'/dialogs'} render={() => <Dialogs addMessage={props.addMessage} updateNewMessageText={props.updateNewMessageText} state={props.state.messagesPage}/>}/>
+                <Route path={'/dialogs'} render={() => <Dialogs addMessage={props.store.addMessage}
+                                                                updateNewMessageText={props.store.updateNewMessageText}
+                                                                state={props.state.messagesPage}/>}/>
                 <Route path={'/news'} component={News}/>
                 <Route path={'/music'} component={Music}/>
                 <Route path={'/settings'} component={Settings}/>
