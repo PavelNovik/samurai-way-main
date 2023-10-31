@@ -9,32 +9,31 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 
-import {StateType, StoreType} from "./redux/state";
+import {StoreType} from "./redux/state";
 
 type AppPropsType = {
     store: StoreType
-    state: StateType
 }
 
-function App(props: AppPropsType) {
-
+function App({store}: AppPropsType) {
+    const state = store.getState()
 
     return (
 
         <div className={'app-wrapper'}>
             <Header/>
-            <Navbar state={props.state.sidebar}/>
+            <Navbar state={state.sidebar}/>
             <div className="app-wrapper-content">
                 {/*<Route path={'/profile'} component={Profile}/>*/}
                 {/*<Route path={'/profile'} component={() => <Profile posts={props.posts}/>}/>*/}
                 <Route path={'/profile'}
-                       render={() => <Profile addPost={props.store.addPost}
-                                              updateNewPostText={props.store.updateNewPostText}
-                                              state={props.state.profilePage}/>}/>
+                       render={() => <Profile addPost={store.addPost.bind(store)}
+                                              updateNewPostText={store.updateNewPostText.bind(store)}
+                                              state={state.profilePage}/>}/>
                 {/*<Route path={'/dialogs'} component={Dialogs}/>*/}
-                <Route path={'/dialogs'} render={() => <Dialogs addMessage={props.store.addMessage}
-                                                                updateNewMessageText={props.store.updateNewMessageText}
-                                                                state={props.state.messagesPage}/>}/>
+                <Route path={'/dialogs'} render={() => <Dialogs addMessage={store.addMessage.bind(store)}
+                                                                updateNewMessageText={store.updateNewMessageText.bind(store)}
+                                                                state={state.messagesPage}/>}/>
                 <Route path={'/news'} component={News}/>
                 <Route path={'/music'} component={Music}/>
                 <Route path={'/settings'} component={Settings}/>

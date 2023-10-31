@@ -14,8 +14,10 @@ const Messages: FC<MessagesPropsType> = ({messages, newMessageValue, addMessage,
     const ref = useRef<HTMLTextAreaElement>(null)
 
     const onChangeHandler = () => {
-        const userInput = ref.current as HTMLTextAreaElement
-        updateNewMessageText(userInput.value)
+        // const userInput = ref.current as HTMLTextAreaElement
+        // updateNewMessageText(userInput.value)
+        const userInput = ref.current?.value
+        if (userInput) updateNewMessageText(userInput)
     }
     const addNewMessage = () => {
         addMessage()

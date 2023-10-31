@@ -1,6 +1,8 @@
 // let rerenderEntireTree = (state: StateType) => {
 //     console.log('state is changed')
 // }
+import {Debugger} from "inspector";
+
 export type UsersType = {
     id: number
     name: string
@@ -52,7 +54,7 @@ export type StoreType = {
     addMessage: () => void
     updateNewPostText: (title: string) => void
     updateNewMessageText: (title: string) => void
-    subscribe: (observer: (state: StateType) => void) => void
+    subscribe: (observer: () => void) => void
 }
 
 export const store: StoreType = {
@@ -80,7 +82,11 @@ export const store: StoreType = {
                     name: 'Viktor',
                     avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLCY_5-tzmuXbYnkbG9AGETzobPZjJcOwlhX4-K-5iiC1YteCANzrHeP3cqggtFnTqsg0&usqp=CAU"
                 },
-                {id: 6, name: 'Valera', avatar: "https://i.pinimg.com/236x/19/25/55/192555b6de984067f092206708913632.jpg"}
+                {
+                    id: 6,
+                    name: 'Valera',
+                    avatar: "https://i.pinimg.com/236x/19/25/55/192555b6de984067f092206708913632.jpg"
+                }
             ],
             messages: [
                 {
@@ -132,39 +138,41 @@ export const store: StoreType = {
                 {id: 4, title: 'Music', path: '/music'},
                 {id: 5, title: 'Settings', path: '/settings'},
             ],
-            friends: [{
-                id: 1,
-                name: 'Andrew',
-                avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp3jjKg5GHVT7UFqTMbGFDYgNHkdjn1KWjncYzUVO452vdH4TswaAcfwWOfLZgevshtN8&usqp=CAU"
-            },
-                {id: 2, name: 'Dmitry', avatar: "https://oceanballoons.ru/content/photo/full/201804181640451.jpg"},
+            friends: [
+                {
+                    id: 1,
+                    name: 'Andrew',
+                    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp3jjKg5GHVT7UFqTMbGFDYgNHkdjn1KWjncYzUVO452vdH4TswaAcfwWOfLZgevshtN8&usqp=CAU"
+                },
+                {
+                    id: 2, name: 'Dmitry', avatar: "https://oceanballoons.ru/content/photo/full/201804181640451.jpg"
+                },
                 {
                     id: 3,
                     name: 'Sasha',
                     avatar: "https://i.pinimg.com/originals/f3/af/3a/f3af3ab02e4ea2074d74c48770ed6784.png"
-                },]
+                },
+            ]
         }
     },
-    _subscriber(state: StateType) {
+    _subscriber() {
         console.log(this)
     },
-
     getState: function () {
-        console.log(this)
         return this._state
     },
     addPost() {
         const newPost: PostsType = {
             id: 7,
-            message: this.getState().profilePage.newPostText,
+            message: this._state.profilePage.newPostText,
             likes: 0
         }
-        console.log(newPost)
         this._state.profilePage.posts.push(newPost)
         this._state.profilePage.newPostText = ''
-        this._subscriber(this._state)
+        this._subscriber(this.getState())
     },
     addMessage() {
+
         const newMessage: MessagesType = {
             id: 7,
             message: this._state.messagesPage.newMessageText,
@@ -173,17 +181,19 @@ export const store: StoreType = {
         }
         this._state.messagesPage.messages.push(newMessage)
         this._state.messagesPage.newMessageText = ''
-        this._subscriber(this._state)
+        this._subscriber(store._state)
     },
     updateNewPostText(postMessage: string) {
+
         this._state.profilePage.newPostText = postMessage
         this._subscriber(this._state)
     },
     updateNewMessageText(message: string) {
+
         this._state.messagesPage.newMessageText = message
         this._subscriber(this._state)
     },
-    subscribe(observer: (state: StateType) => void) {
+    subscribe(observer) {
         this._subscriber = observer
     }
 }
