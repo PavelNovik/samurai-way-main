@@ -3,18 +3,17 @@ import styles from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-import {ProfilePageType} from "../../redux/state";
+import {ProfilePageType, StoreActionType} from "../../redux/state";
 
 type ProfilePropsType = {
     state: ProfilePageType
-    addPost: () => void
-    updateNewPostText: (title: string) => void
+    dispatch: (action: StoreActionType) => void
 }
 const Profile = (props: ProfilePropsType) => {
     return (
         <div className={styles.content}>
             <ProfileInfo/>
-            <MyPosts addPost={props.addPost} updateNewPostText={props.updateNewPostText} newPostText={props.state.newPostText} posts={props.state.posts}/>
+            <MyPosts dispatch={props.dispatch} state={props.state}/>
         </div>
     );
 };
