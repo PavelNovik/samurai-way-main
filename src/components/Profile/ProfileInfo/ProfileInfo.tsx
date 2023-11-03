@@ -6,7 +6,7 @@ const ProfileInfo = () => {
         <div className={s.profileInfo}>
             <div>
                 <img alt={'wallpaper'}
-                     src={"https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"}/>
+                     src={"https://www.casa-pacifica.com/wp-content/uploads/2017/06/cropped-colorful-smoke-artistic-abstract-web-header.jpg"}/>
             </div>
             <div className={s.profileInfoDescription}>
                 ava + description
