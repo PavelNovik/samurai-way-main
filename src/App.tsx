@@ -9,10 +9,12 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 
-import {StoreType} from "./redux/state";
+import {StateType, StoreActionType, StoreType} from "./redux/state";
 
 type AppPropsType = {
     store: StoreType
+    state: StateType
+    dispatch: (action: StoreActionType) => void
 }
 
 function App({store}: AppPropsType) {

@@ -4,7 +4,7 @@
 import {v1} from "uuid";
 
 export type UsersType = {
-    id: string
+    id: number
     name: string
     avatar: string
 }
@@ -50,7 +50,7 @@ export type StoreType = {
     _state: StateType
     _subscriber: (state: StateType) => void
     getState: () => StateType
-    subscribe: (observer: () => void) => void
+    subscribe: (observer: (state: StateType) => void) => void
     // addPost: () => void
     // addMessage: () => void
     // updateNewPostText: (title: string) => void
@@ -66,28 +66,28 @@ export const store: StoreType = {
         messagesPage: {
             users: [
                 {
-                    id: v1(),
+                    id: 1,
                     name: 'Andrew',
                     avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp3jjKg5GHVT7UFqTMbGFDYgNHkdjn1KWjncYzUVO452vdH4TswaAcfwWOfLZgevshtN8&usqp=CAU"
                 },
-                {id: v1(), name: 'Dmitry', avatar: "https://oceanballoons.ru/content/photo/full/201804181640451.jpg"},
+                {id: 2, name: 'Dmitry', avatar: "https://oceanballoons.ru/content/photo/full/201804181640451.jpg"},
                 {
-                    id: v1(),
+                    id: 3,
                     name: 'Sasha',
                     avatar: "https://i.pinimg.com/originals/f3/af/3a/f3af3ab02e4ea2074d74c48770ed6784.png"
                 },
                 {
-                    id: v1(),
+                    id: 4,
                     name: 'Sveta',
                     avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDhB7DwE6k6D4CyKJdRJsq8YPjD7ebmtENAaBwU9XZlNbK0eVq6tyUoBdN1Jg9bhq3Eak&usqp=CAU"
                 },
                 {
-                    id: v1(),
+                    id: 5,
                     name: 'Viktor',
                     avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLCY_5-tzmuXbYnkbG9AGETzobPZjJcOwlhX4-K-5iiC1YteCANzrHeP3cqggtFnTqsg0&usqp=CAU"
                 },
                 {
-                    id: v1(),
+                    id: 6,
                     name: 'Valera',
                     avatar: "https://i.pinimg.com/236x/19/25/55/192555b6de984067f092206708913632.jpg"
                 }
@@ -96,31 +96,31 @@ export const store: StoreType = {
                 {
                     id: v1(),
                     isUser: true,
-                    message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus alias aspernatur eius inventore laborum nemo rem? Ab aliquid dolorem et provident?',
+                    message: 'Hello) How are you?',
                     src: 'https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg'
                 },
                 {
                     id: v1(),
                     isUser: false,
-                    message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus alias aspernatur eius inventore laborum nemo rem? Ab a provident?',
+                    message: 'I\'m fine) Thank you! What\'s up man?',
                     src: 'https://as1.ftcdn.net/v2/jpg/01/20/57/42/1000_F_120574212_GvxCtULmstescUI0vehjptnhEphRuRW1.jpg'
                 },
                 {
                     id: v1(),
                     isUser: true,
-                    message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus alias aspernatur eius inventore laborum nemo rem? Ab a provident?',
+                    message: 'All right!',
                     src: 'https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg'
                 },
                 {
                     id: v1(),
                     isUser: false,
-                    message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, quibusdam!',
+                    message: 'I\'m going to the walk. Maybe you come with me?',
                     src: 'https://as1.ftcdn.net/v2/jpg/01/20/57/42/1000_F_120574212_GvxCtULmstescUI0vehjptnhEphRuRW1.jpg'
                 },
                 {
                     id: v1(),
                     isUser: true,
-                    message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit laborum nemo rem? Ab a provident?',
+                    message: 'Ok, Let\'s go!',
                     src: 'https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg'
                 },
             ],
@@ -144,15 +144,15 @@ export const store: StoreType = {
             ],
             friends: [
                 {
-                    id: v1(),
+                    id: 1,
                     name: 'Andrew',
                     avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp3jjKg5GHVT7UFqTMbGFDYgNHkdjn1KWjncYzUVO452vdH4TswaAcfwWOfLZgevshtN8&usqp=CAU"
                 },
                 {
-                    id: v1(), name: 'Dmitry', avatar: "https://oceanballoons.ru/content/photo/full/201804181640451.jpg"
+                    id: 2, name: 'Dmitry', avatar: "https://oceanballoons.ru/content/photo/full/201804181640451.jpg"
                 },
                 {
-                    id: v1(),
+                    id: 3,
                     name: 'Sasha',
                     avatar: "https://i.pinimg.com/originals/f3/af/3a/f3af3ab02e4ea2074d74c48770ed6784.png"
                 },
