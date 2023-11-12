@@ -3,12 +3,10 @@ import Message from "./Message/Message";
 import s from "./Messages.module.css"
 
 import {
-    addMessageAC,
     MessagesPageType,
-    MessagesType,
     StoreActionType,
-    updateNewMessageTextAC
-} from "../../../redux/state";
+} from "../../../redux/store";
+import {addMessageAC, updateNewMessageTextAC} from "../../../redux/messagesReducer";
 
 type MessagesPropsType = {
     state: MessagesPageType

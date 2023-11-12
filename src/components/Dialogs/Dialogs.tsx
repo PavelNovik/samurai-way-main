@@ -3,7 +3,7 @@ import Users from "./Users/Users";
 import Messages from "./Messages/Messages";
 import s from './Dialogs.module.css'
 
-import {MessagesPageType, StoreActionType} from "../../redux/state";
+import {MessagesPageType, StoreActionType} from "../../redux/store";
 
 
 type DialogPropsType = {

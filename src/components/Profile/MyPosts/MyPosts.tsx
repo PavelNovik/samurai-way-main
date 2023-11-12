@@ -2,7 +2,8 @@ import React, {createRef, FC, useRef} from 'react';
 import styles from "./MyPosts.module.css"
 import Post from "./Post/Post";
 
-import {addPostAC, PostsType, ProfilePageType, StoreActionType, updateNewPostTextAC} from "../../../redux/state";
+import {ProfilePageType, StoreActionType } from "../../../redux/store";
+import {addPostAC, updateNewPostTextAC} from "../../../redux/profileReducer";
 
 type MyPostsPropsType = {
     state: ProfilePageType
