@@ -1,42 +1,45 @@
-import React, {createRef, FC, useRef} from 'react';
+import React, {createRef, FC} from 'react';
 import styles from "./MyPosts.module.css"
 import Post from "./Post/Post";
-
-import {ProfilePageType, StoreActionType } from "../../../redux/store";
-import {addPostAC, updateNewPostTextAC} from "../../../redux/profileReducer";
+import {PostsType} from "../../../redux/store";
 
 type MyPostsPropsType = {
-    state: ProfilePageType
-    dispatch: (action: StoreActionType) => void
+    posts: PostsType[]
+    newPostText: string
+    addNewPost: () => void
+    updateNewPostText: (text: string) => void
 }
-const MyPosts: FC<MyPostsPropsType> = ({state, dispatch}) => {
+const MyPosts: FC<MyPostsPropsType> = ({posts, newPostText, addNewPost, updateNewPostText}) => {
 
-    const postsList = state.posts.map(p => <Post key={p.id} message={p.message} likes={p.likes}/>)
+    const postsList = posts.map(p => <Post key={p.id} message={p.message} likes={p.likes}/>)
 
     // const textareaRef = useRef<HTMLTextAreaElement>(null)
     // const el = textareaRef.current as HTMLTextAreaElement
 
     const newPostElement = createRef<HTMLTextAreaElement>()
-    const addNewPost = () => {
-        dispatch(addPostAC())
+    const addNewPostHandler = () => {
+        // dispatch(addPostAC())
+        addNewPost()
         // updateNewPostText('')
     }
 
-    const onChangeHandler = () => {
+    const onPostChangeHandler = () => {
         // const text = newPostElement.current as HTMLTextAreaElement
         // updateNewPostText(text.value)
+        // const text = newPostElement.current?.value
+        // if (text) dispatch(updateNewPostTextAC(text))
         const text = newPostElement.current?.value
-        if (text) dispatch(updateNewPostTextAC(text))
+        updateNewPostText(text ? text : '')
     }
 
     return (
         <div>My posts
             <div>
                 {/*<textarea ref={textareaRef} placeholder={'your news...'}/>*/}
-                <textarea ref={newPostElement} value={state.newPostText} placeholder={'your news...'}
-                          onChange={onChangeHandler}/>
+                <textarea ref={newPostElement} value={newPostText} placeholder={'your post...'}
+                          onChange={onPostChangeHandler}/>
                 {/*<button onClick={()=> console.log(el.value)}>Add Post</button>*/}
-                <button onClick={addNewPost}>Add Post</button>
+                <button onClick={addNewPostHandler}>Add Post</button>
             </div>
             <div className={styles.posts}>
                 {postsList}

@@ -17,8 +17,7 @@ type AppPropsType = {
     dispatch: (action: StoreActionType) => void
 }
 
-function App({store}: AppPropsType) {
-    const state = store.getState()
+function App({store, state}: AppPropsType) {
 
     return (
 
@@ -29,11 +28,10 @@ function App({store}: AppPropsType) {
                 {/*<Route path={'/profile'} component={Profile}/>*/}
                 {/*<Route path={'/profile'} component={() => <Profile posts={props.posts}/>}/>*/}
                 <Route path={'/profile'}
-                       render={() => <Profile dispatch={store.dispatch.bind(store)}
-                                              state={state.profilePage}/>}/>
+                       render={() => <Profile store={store}/>}/>
                 {/*<Route path={'/dialogs'} component={Dialogs}/>*/}
                 <Route path={'/dialogs'}
-                       render={() => <Dialogs dispatch={store.dispatch.bind(store)} state={state.messagesPage}/>}/>
+                       render={() => <Dialogs store={store}/>}/>
                 <Route path={'/news'} component={News}/>
                 <Route path={'/music'} component={Music}/>
                 <Route path={'/settings'} component={Settings}/>

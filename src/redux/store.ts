@@ -206,9 +206,9 @@ export const store: StoreType = {
     // },
 
     dispatch(action: StoreActionType) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
-        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        // this._state.profilePage = profileReducer(this._state.profilePage, action)
+        // this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
+        // this._state.sidebar = sidebarReducer(this._state.sidebar, action)
         this._subscriber(this._state)
 
         // switch (action.type) {

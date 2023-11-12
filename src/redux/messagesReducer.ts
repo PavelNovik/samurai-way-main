@@ -1,4 +1,4 @@
-import {MessagesPageType, MessagesType, StoreActionType} from "./store";
+import {MessagesPageType, MessagesType} from "./store";
 import {v1} from "uuid";
 
 const initialState: MessagesPageType={
@@ -65,7 +65,7 @@ const initialState: MessagesPageType={
     newMessageText: 'new message text'
 }
 
-export const messagesReducer = (state: MessagesPageType = initialState, action: StoreActionType): MessagesPageType => {
+export const messagesReducer = (state: MessagesPageType = initialState, action: MessagesActionType): MessagesPageType => {
     switch (action.type) {
         case 'ADD-MESSAGE': {
             const newMessage: MessagesType = {

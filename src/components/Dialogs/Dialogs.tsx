@@ -3,21 +3,22 @@ import Users from "./Users/Users";
 import Messages from "./Messages/Messages";
 import s from './Dialogs.module.css'
 
-import {MessagesPageType, StoreActionType} from "../../redux/store";
+import {MessagesPageType, StoreActionType, StoreType} from "../../redux/store";
+import MessagesContainer from "./Messages/MessagesContainer";
 
 
 type DialogPropsType = {
-    state: MessagesPageType
-    dispatch: (action: StoreActionType) => void
+   store: StoreType
 }
 const Dialogs = (props: DialogPropsType) => {
+    const state = props.store.getState().messagesPage
 
     return (
         <div className={s.dialogs}>
             <h2>DIALOGS</h2>
             <div className={s.wrapper}>
-                <Users users={props.state.users}/>
-                <Messages dispatch={props.dispatch} state={props.state}/>
+                <Users users={state.users}/>
+                <MessagesContainer store={props.store}/>
             </div>
 
         </div>
