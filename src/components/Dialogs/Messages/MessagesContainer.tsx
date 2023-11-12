@@ -1,11 +1,6 @@
-import React, {FC, useRef} from 'react';
-import Message from "./Message/Message";
-import s from "./Messages.module.css"
+import React, {FC} from 'react';
 
-import {
-    MessagesPageType,
-    StoreActionType, StoreType,
-} from "../../../redux/store";
+import {StoreType} from "../../../redux/store";
 import {addMessageAC, updateNewMessageTextAC} from "../../../redux/messagesReducer";
 import Messages from "./Messages";
 
@@ -24,7 +19,8 @@ const MessagesContainer: FC<MessagesPropsType> = ({store}) => {
         store.dispatch(addMessageAC())
     }
 
-    return (<Messages messages={state.messages} newMessageText={state.newMessageText} updateNewMessageText={updateNewMessageText} addNewMessage={addNewMessage}/>
+    return (<Messages messages={state.messages} newMessageText={state.newMessageText}
+                      updateNewMessageText={updateNewMessageText} addNewMessage={addNewMessage}/>
     );
 };
 
