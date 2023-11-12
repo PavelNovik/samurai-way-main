@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
-import {StateType, store} from "./redux/store";
+import {StateType} from "./redux/store";
+import store from "./redux/redux-store";
 
 const rerenderEntireTree = (state: StateType) => {
     ReactDOM.render(
@@ -14,5 +15,6 @@ const rerenderEntireTree = (state: StateType) => {
     );
 }
 rerenderEntireTree(store.getState())
-store.subscribe(rerenderEntireTree)
+// store.subscribe(rerenderEntireTree)
+store.subscribe(()=> rerenderEntireTree(store.getState()))
 
