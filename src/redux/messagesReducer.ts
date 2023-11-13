@@ -1,5 +1,22 @@
-import {MessagesPageType, MessagesType} from "./store";
 import {v1} from "uuid";
+
+export type UsersType = {
+    id: number
+    name: string
+    avatar: string
+}
+export type MessagesType = {
+    id: string
+    message: string
+    src: string
+    isUser: boolean
+}
+export type MessagesPageType = {
+    users: UsersType[]
+    messages: MessagesType[]
+    newMessageText: string
+
+}
 
 const initialState: MessagesPageType={
     users: [
@@ -49,18 +66,7 @@ const initialState: MessagesPageType={
             message: 'All right!',
             src: 'https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg'
         },
-        {
-            id: v1(),
-            isUser: false,
-            message: 'I\'m going to the walk. Maybe you come with me?',
-            src: 'https://as1.ftcdn.net/v2/jpg/01/20/57/42/1000_F_120574212_GvxCtULmstescUI0vehjptnhEphRuRW1.jpg'
-        },
-        {
-            id: v1(),
-            isUser: true,
-            message: 'Ok, Let\'s go!',
-            src: 'https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg'
-        },
+
     ],
     newMessageText: 'new message text'
 }

@@ -1,54 +1,28 @@
-// import React, {FC} from 'react';
-
-// import {StoreType} from "../../../redux/store";
-import {addMessageAC, updateNewMessageTextAC} from "../../../redux/messagesReducer";
+import {addMessageAC, MessagesType, updateNewMessageTextAC} from "../../../redux/messagesReducer";
 import Messages from "./Messages";
-// import StoreContext from "../../../redux/StoreContext";
 import {connect} from "react-redux";
-import {StateType} from "../../../redux/store";
+import {AppStateType} from "../../../redux/redux-store";
+import {Dispatch} from "redux";
 
-// type MessagesPropsType = {
-    // store: StoreType
-// }
-// const MessagesContainer: FC<MessagesPropsType> = (props) => {
-//     // const state = store.getState().messagesPage
-//     //
-//     // const updateNewMessageText = (text: string) => {
-//     //     // const userInput = ref.current as HTMLTextAreaElement
-//     //     // updateNewMessageText(userInput.value)
-//     //     store.dispatch(updateNewMessageTextAC(text))
-//     // }
-//     // const addNewMessage = () => {
-//     //     store.dispatch(addMessageAC())
-//     // }
-//
-//     return (<StoreContext.Consumer>{
-//             (store) => {
-//                 const state = store.getState().messagesPage
-//                 const updateNewMessageText = (text: string) => {
-//                     // const userInput = ref.current as HTMLTextAreaElement
-//                     // updateNewMessageText(userInput.value)
-//                     store.dispatch(updateNewMessageTextAC(text))
-//                 }
-//                 const addNewMessage = () => {
-//                     store.dispatch(addMessageAC())
-//                 }
-//                 return (<Messages messages={state.messages} newMessageText={state.newMessageText}
-//                                   updateNewMessageText={updateNewMessageText}
-//                                   addNewMessage={addNewMessage}/>)
-//             }}
-//         </StoreContext.Consumer>
-//     )
-//         ;
-// };
 
-const mapStateToProps = (state: StateType) => {
+
+type MapStatePropsType = {
+    messages: MessagesType[]
+    newMessageText: string
+}
+type MapDispatchPropsType = {
+    updateNewMessageText:(text: string)=> void
+    addNewMessage:()=> void
+}
+
+export type MessagesPropsType = MapStatePropsType & MapDispatchPropsType
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         messages: state.messagesPage.messages,
         newMessageText: state.messagesPage.newMessageText
     }
 }
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType  => {
     return {
         updateNewMessageText: (text: string) => dispatch(updateNewMessageTextAC(text)),
         addNewMessage: ()=> dispatch(addMessageAC())

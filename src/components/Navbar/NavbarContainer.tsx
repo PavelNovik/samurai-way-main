@@ -1,28 +1,24 @@
-// import React, {FC} from 'react';
-import {StateType, StoreType} from "../../redux/store";
-// import StoreContext from "../../redux/StoreContext";
 import Navbar from "./Navbar";
-// import {addPostAC, updateNewPostTextAC} from "../../redux/profileReducer";
 import {connect} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
+import {SidebarType} from "../../redux/sidebarReducer";
+import {Dispatch} from "redux";
 
 
-// const NavbarContainer: FC = () => {
-//     return (
-//         <StoreContext.Consumer>
-//             {(store: StoreType) => {
-//                 const state = store.getState().sidebar
-//                 return <Navbar state={state}/>
-//             }}
-//         </StoreContext.Consumer>
-//     );
-// };
 
-const mapStateToProps = (state: StateType) => {
+type MapStatePropsType = {
+    state: SidebarType
+}
+type MapDispatchPropsType = {
+
+}
+
+const mapStateToProps = (state: AppStateType):MapStatePropsType => {
     return {
         state: state.sidebar,
     }
 }
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return {}
 }
 

@@ -1,30 +1,25 @@
 import React, {FC, useRef} from 'react';
 import Message from "./Message/Message";
 import s from "./Messages.module.css"
+import {MessagesPropsType} from "./MessagesContainer";
+// import {MessagesType} from "../../../redux/messagesReducer";
 
-import {MessagesType} from "../../../redux/store";
 
-type MessagesPropsType = {
-    // state: MessagesPageType
-    // dispatch: (action: StoreActionType) => void
-    messages: MessagesType[]
-    newMessageText: string
-    updateNewMessageText: (text: string) => void
-    addNewMessage: () => void
-}
+// type MessagesPropsType = {
+//     messages: MessagesType[]
+//     newMessageText: string
+//     updateNewMessageText: (text: string) => void
+//     addNewMessage: () => void
+// }
 const Messages: FC<MessagesPropsType> = (props) => {
     const ref = useRef<HTMLTextAreaElement>(null)
 
     const onChangeHandler = () => {
-        // const userInput = ref.current as HTMLTextAreaElement
-        // updateNewMessageText(userInput.value)
         const userInput = ref.current?.value
-        // if (userInput) dispatch(updateNewMessageTextAC(userInput))
         props.updateNewMessageText(userInput ? userInput : '')
 
     }
     const addNewMessage = () => {
-        // dispatch(addMessageAC())
         props.addNewMessage()
     }
 

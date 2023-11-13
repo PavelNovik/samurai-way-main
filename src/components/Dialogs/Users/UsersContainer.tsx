@@ -1,32 +1,22 @@
-// import React, {FC} from 'react';
-
-import {StateType, StoreType, UsersType} from "../../../redux/store";
 import Users from "./Users";
-// import StoreContext from "../../../redux/StoreContext";
 import {connect} from "react-redux";
-// import {addPostAC, updateNewPostTextAC} from "../../../redux/profileReducer";
+import {AppStateType} from "../../../redux/redux-store";
+import {UsersType} from "../../../redux/messagesReducer";
+import {Dispatch} from "redux";
 
-// type UserPropsType = {
-//      store: StoreType
-// }
-// const UsersContainer: FC<UserPropsType> = () => {
-//
-//     return (
-//         <StoreContext.Consumer>
-//             {(store: StoreType) => {
-//                 const users: UsersType[] = store.getState().messagesPage.users
-//                 return <Users users={users}/>
-//             }}
-//         </StoreContext.Consumer>
-//     )
-// }
 
-const mapStateToProps = (state: StateType) => {
+type MapStatePropsType = {
+    users: UsersType[]
+}
+type MapDispatchPropsType = {
+
+}
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         users: state.messagesPage.users,
     }
 }
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return {}
 }
 

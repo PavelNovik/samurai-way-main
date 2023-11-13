@@ -1,6 +1,14 @@
-import {PostsType, ProfilePageType} from "./store";
 import {v1} from "uuid";
 
+export type PostsType = {
+    id: string
+    message: string
+    likes: number
+}
+export type ProfilePageType = {
+    posts: PostsType[]
+    newPostText: string
+}
 
 const initialState: ProfilePageType = {
     posts: [

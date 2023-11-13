@@ -1,6 +1,18 @@
-import {SidebarType, StoreActionType} from "./store";
+import {StoreActionType} from "./store";
 import {v1} from "uuid";
+import {UsersType} from "./messagesReducer";
 
+export type SidebarMenuType = {
+    id: string
+    title: string
+    path: string
+}
+
+
+export type SidebarType = {
+    menu: SidebarMenuType[]
+    friends: UsersType[]
+}
 
 const initialState: SidebarType={
     menu: [

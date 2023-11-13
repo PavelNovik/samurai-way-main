@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import s from './Users.module.css'
 import {NavLink} from "react-router-dom";
+import {UsersType} from "../../../redux/messagesReducer";
 
-import {UsersType} from "../../../redux/store";
 
 type UserPropsType = {
     users: UsersType[]
