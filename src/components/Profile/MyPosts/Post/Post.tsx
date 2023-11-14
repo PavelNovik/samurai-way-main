@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import styles from "./Post.module.css"
+import pic6 from '../../../../assets/img/pic6.jpg'
 
 type PostPropsType = {
     message: string
@@ -9,7 +10,7 @@ const Post: FC<PostPropsType> = ({message, likes}) => {
     return (
         <div className={styles.item}>
             <div>
-                <img alt={"user avatar"} src={"https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg"}/>
+                <img alt={"user avatar"} src={pic6}/>
                 <span>{message}</span>
             </div>
 

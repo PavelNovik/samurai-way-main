@@ -1,15 +1,8 @@
 import React, {createRef, FC} from 'react';
 import styles from "./MyPosts.module.css"
 import Post from "./Post/Post";
-// import {PostsType} from "../../../redux/profileReducer";
 import {MyPostPropsType} from "./MyPostsContainer";
 
-// type MyPostsPropsType = {
-//     posts: PostsType[]
-//     newPostText: string
-//     addNewPost: () => void
-//     updateNewPostText: (text: string) => void
-// }
 const MyPosts: FC<MyPostPropsType> = ({posts, newPostText, addNewPost, updateNewPostText}) => {
 
     const postsList = posts.map(p => <Post key={p.id} message={p.message} likes={p.likes}/>)

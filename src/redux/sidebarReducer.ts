@@ -1,6 +1,9 @@
 import {StoreActionType} from "./store";
 import {v1} from "uuid";
 import {UsersType} from "./messagesReducer";
+import pic1 from '../assets/img/pic1.svg'
+import pic2 from '../assets/img/pic2.svg'
+import pic3 from '../assets/img/pic3.jpg'
 
 export type SidebarMenuType = {
     id: string
@@ -14,7 +17,7 @@ export type SidebarType = {
     friends: UsersType[]
 }
 
-const initialState: SidebarType={
+const initialState: SidebarType = {
     menu: [
         {id: v1(), title: 'Profile', path: '/profile'},
         {id: v1(), title: 'Messages', path: '/dialogs'},
@@ -26,15 +29,15 @@ const initialState: SidebarType={
         {
             id: 1,
             name: 'Andrew',
-            avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp3jjKg5GHVT7UFqTMbGFDYgNHkdjn1KWjncYzUVO452vdH4TswaAcfwWOfLZgevshtN8&usqp=CAU"
+            avatar: pic1
         },
         {
-            id: 2, name: 'Dmitry', avatar: "https://oceanballoons.ru/content/photo/full/201804181640451.jpg"
+            id: 2, name: 'Dmitry', avatar: pic2
         },
         {
             id: 3,
             name: 'Sasha',
-            avatar: "https://i.pinimg.com/originals/f3/af/3a/f3af3ab02e4ea2074d74c48770ed6784.png"
+            avatar: pic3
         },
     ]
 }
