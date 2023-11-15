@@ -6,6 +6,8 @@ import {ProfileActionType} from "./profileReducer";
 import {MessagesActionType} from "./messagesReducer";
 // import {sidebarReducer} from "./sidebarReducer";
 
+export type StoreActionType = ProfileActionType | MessagesActionType
+
 // export type UsersType = {
 //     id: number
 //     name: string
@@ -62,7 +64,6 @@ import {MessagesActionType} from "./messagesReducer";
 //     dispatch: (action: StoreActionType) => void
 // }
 
-export type StoreActionType = ProfileActionType | MessagesActionType
 
 // export const store: StoreType = {
 //     _state: {
