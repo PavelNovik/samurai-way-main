@@ -26,19 +26,9 @@ const initialState: SidebarType = {
         {id: v1(), title: 'Settings', path: '/settings'},
     ],
     friends: [
-        {
-            id: 1,
-            name: 'Andrew',
-            avatar: pic1
-        },
-        {
-            id: 2, name: 'Dmitry', avatar: pic2
-        },
-        {
-            id: 3,
-            name: 'Sasha',
-            avatar: pic3
-        },
+        {id: 1, name: 'Andrew', avatar: pic1},
+        {id: 2, name: 'Dmitry', avatar: pic2},
+        {id: 3, name: 'Sasha', avatar: pic3},
     ]
 }
 export const sidebarReducer = (state: SidebarType = initialState, action: StoreActionType): SidebarType => {

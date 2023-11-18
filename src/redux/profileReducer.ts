@@ -29,12 +29,13 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
             return {...state, posts: [...state.posts, newPost], newPostText: ''}
         }
         case 'UPDATE-POST': {
-            const newPost = action.payload.postMessage
+            const newPost = action.postMessage
 
             return {...state, newPostText: newPost}
         }
 
-        default: return state
+        default:
+            return state
     }
 }
 
@@ -44,15 +45,12 @@ type AddPostACType = ReturnType<typeof addPostAC>
 export const addPostAC = () => {
     return {
         type: "ADD-POST",
-        payload: {}
     } as const
 }
 type UpdateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
 export const updateNewPostTextAC = (postMessage: string) => {
     return {
         type: "UPDATE-POST",
-        payload: {
-            postMessage: postMessage
-        }
+        postMessage: postMessage
     } as const
 }

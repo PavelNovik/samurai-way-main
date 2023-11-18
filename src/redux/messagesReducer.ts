@@ -70,7 +70,7 @@ export const messagesReducer = (state: MessagesPageType = initialState, action: 
             return {...state, messages: [...state.messages, newMessage], newMessageText: ''}
         }
         case 'UPDATE-MESSAGE': {
-            const newMessage = action.payload.message
+            const newMessage = action.message
             return {...state, newMessageText: newMessage}
         }
         default:
@@ -84,7 +84,6 @@ type AddMessageACType = ReturnType<typeof addMessageAC>
 export const addMessageAC = () => {
     return {
         type: "ADD-MESSAGE",
-        payload: {}
     } as const
 }
 
@@ -92,8 +91,6 @@ type UpdateNewMessageTextACType = ReturnType<typeof updateNewMessageTextAC>
 export const updateNewMessageTextAC = (message: string) => {
     return {
         type: "UPDATE-MESSAGE",
-        payload: {
-            message: message
-        }
+        message: message
     } as const
 }
