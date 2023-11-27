@@ -17,55 +17,56 @@ export type UserType = {
 }
 export type UsersStateType = { users: UserType[]}
 
-export type UserReducerActionType = FollowUserACType | UnfollowUserACType | SetUsersAC
+export type UserReducerActionType = FollowUserACType | UnfollowUserACType | SetUsersAC | ChangeUserStatusAC
 
 const initialState: UsersStateType = {
-    users: [
-        {
-            id: v1(),
-            avatar: pic1,
-            isFollow: false,
-            name: 'Dmitry K.',
-            location: {
-                country: 'Belarus',
-                city: 'Minsk',
-            },
-            status: 'I am looking for a Job right now...'
-        },
-        {
-            id: v1(),
-            avatar: pic2,
-            isFollow: false,
-            name: 'Svetlana D.',
-            location: {
-                country: 'Belarus',
-                city: 'Minsk',
-            },
-            status: 'I am so pretty'
-        },
-        {
-            id: v1(),
-            avatar: pic3,
-            isFollow: true,
-            name: 'Sergei S.',
-            location: {
-                country: 'Ukraine',
-                city: 'Kiev',
-            },
-            status: 'I like football!!!'
-        },
-        {
-            id: v1(),
-            avatar: pic4,
-            isFollow: true,
-            name: 'Andrew T.',
-            location: {
-                country: 'United States',
-                city: 'Philadelphia',
-            },
-            status: 'I am free to help you to create good Video Production'
-        }
-    ]
+    users:[]
+    // users: [
+    //     {
+    //         id: v1(),
+    //         avatar: pic1,
+    //         isFollow: false,
+    //         name: 'Dmitry K.',
+    //         location: {
+    //             country: 'Belarus',
+    //             city: 'Minsk',
+    //         },
+    //         status: 'I am looking for a Job right now...'
+    //     },
+    //     {
+    //         id: v1(),
+    //         avatar: pic2,
+    //         isFollow: false,
+    //         name: 'Svetlana D.',
+    //         location: {
+    //             country: 'Belarus',
+    //             city: 'Minsk',
+    //         },
+    //         status: 'I am so pretty'
+    //     },
+    //     {
+    //         id: v1(),
+    //         avatar: pic3,
+    //         isFollow: true,
+    //         name: 'Sergei S.',
+    //         location: {
+    //             country: 'Ukraine',
+    //             city: 'Kiev',
+    //         },
+    //         status: 'I like football!!!'
+    //     },
+    //     {
+    //         id: v1(),
+    //         avatar: pic4,
+    //         isFollow: true,
+    //         name: 'Andrew T.',
+    //         location: {
+    //             country: 'United States',
+    //             city: 'Philadelphia',
+    //         },
+    //         status: 'I am free to help you to create good Video Production'
+    //     }
+    // ]
 }
 export const userReducer = (state = initialState, action: UserReducerActionType): UsersStateType => {
     switch (action.type) {
@@ -77,6 +78,9 @@ export const userReducer = (state = initialState, action: UserReducerActionType)
         }
         case 'SET_USERS': {
             return {users: [...state.users, ...action.users]}
+        }
+        case 'CHANGE_USER_STATUS': {
+            return {users: state.users.map(u => u.id === action.userId ? {...u, isFollow: !u.isFollow} : u)}
         }
         default:
             return state
@@ -104,5 +108,12 @@ export const setUsersAC = (users: UserType[])=> {
     return {
         type: 'SET_USERS',
         users
+    } as const
+}
+type ChangeUserStatusAC = ReturnType<typeof changeUserStatusAC>
+export const changeUserStatusAC = (userId: string)=> {
+    return {
+        type: 'CHANGE_USER_STATUS',
+        userId
     } as const
 }

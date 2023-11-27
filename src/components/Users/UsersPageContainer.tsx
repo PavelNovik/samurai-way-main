@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {Users} from "./Users";
-import {followUserAC, setUsersAC, UsersStateType, UserType} from "../../redux/userReducer";
+import {changeUserStatusAC, followUserAC, setUsersAC, UsersStateType, UserType} from "../../redux/userReducer";
 import {Dispatch} from "redux";
 import {AppStateType} from "../../redux/redux-store";
 
@@ -9,6 +9,7 @@ type MapDispatchType = {
     onFollow: (userId: string)=> void
     onUnfollow: (userId: string)=> void
     setUsers: (users: UserType[])=> void
+    changeUserStatus: (userId: string)=> void
 }
 
 export type UsersPagePropsType = MapStateType & MapDispatchType
@@ -21,7 +22,8 @@ const mapDispatchToProps = (dispatch: Dispatch):MapDispatchType => {
 return {
     onFollow: (userId:string)=> dispatch(followUserAC(userId)),
     onUnfollow: (userId:string)=> dispatch(followUserAC(userId)),
-    setUsers: (users: UserType[])=> dispatch(setUsersAC(users))
+    setUsers: (users: UserType[])=> dispatch(setUsersAC(users)),
+    changeUserStatus: (userId:string)=> dispatch(changeUserStatusAC(userId))
 }
 }
 export const UsersPageContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
