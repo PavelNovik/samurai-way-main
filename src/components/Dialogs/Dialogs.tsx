@@ -8,7 +8,7 @@ const Dialogs = () => {
 
     return (
         <div className={s.dialogs}>
-            <h2>DIALOGS</h2>
+            <h2>Dialogs</h2>
             <div className={s.wrapper}>
                 <UsersContainer/>
                 <MessagesContainer/>
