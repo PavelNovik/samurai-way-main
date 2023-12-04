@@ -84,7 +84,7 @@ export const userReducer = (state = initialState, action: UserReducerActionType)
             return {users: [...state.users, ...action.users]}
         }
         case 'CHANGE_USER_STATUS': {
-            return {users: state.users.map(u => u.id === action.userId ? {...u, isFollow: !u.followed} : u)}
+            return {users: state.users.map(u => u.id === action.userId ? {...u, followed: !u.followed} : u)}
         }
         default:
             return state
