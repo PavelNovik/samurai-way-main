@@ -5,22 +5,26 @@ import pic3 from '../assets/img/pic3.jpg'
 import pic4 from '../assets/img/pic4.jpg'
 
 export type UserType = {
-    id: string
-    avatar: string
-    isFollow: boolean
+    id: string | number
+    photos: {
+        small: string | null
+        large: string | null
+    }
+    followed: boolean
     name: string
-    location: {
+    location?: {
         country: string
         city: string
     }
-    status: string
+    uniqueUrlName: null
+    status: string | null
 }
-export type UsersStateType = { users: UserType[]}
+export type UsersStateType = { users: UserType[] }
 
 export type UserReducerActionType = FollowUserACType | UnfollowUserACType | SetUsersAC | ChangeUserStatusAC
 
 const initialState: UsersStateType = {
-    users:[]
+    users: []
     // users: [
     //     {
     //         id: v1(),
@@ -71,16 +75,16 @@ const initialState: UsersStateType = {
 export const userReducer = (state = initialState, action: UserReducerActionType): UsersStateType => {
     switch (action.type) {
         case 'FOLLOW_USER': {
-            return {users: state.users.map(u => u.id === action.userId ? {...u, isFollow: true} : u)}
+            return {users: state.users.map(u => u.id === action.userId ? {...u, followed: true} : u)}
         }
         case 'UNFOLLOW_USER': {
-            return {users: state.users.map(u => u.id === action.userId ? {...u, isFollow: false} : u)}
+            return {users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)}
         }
         case 'SET_USERS': {
             return {users: [...state.users, ...action.users]}
         }
         case 'CHANGE_USER_STATUS': {
-            return {users: state.users.map(u => u.id === action.userId ? {...u, isFollow: !u.isFollow} : u)}
+            return {users: state.users.map(u => u.id === action.userId ? {...u, isFollow: !u.followed} : u)}
         }
         default:
             return state
@@ -88,7 +92,7 @@ export const userReducer = (state = initialState, action: UserReducerActionType)
 }
 
 type FollowUserACType = ReturnType<typeof followUserAC>
-export const followUserAC = (userId: string) => {
+export const followUserAC = (userId: string | number) => {
     return {
         type: 'FOLLOW_USER',
         userId
@@ -96,7 +100,7 @@ export const followUserAC = (userId: string) => {
 }
 
 type UnfollowUserACType = ReturnType<typeof unfollowUserAC>
-export const unfollowUserAC = (userId: string) => {
+export const unfollowUserAC = (userId: string | number) => {
     return {
         type: 'UNFOLLOW_USER',
         userId
@@ -104,14 +108,14 @@ export const unfollowUserAC = (userId: string) => {
 }
 
 type SetUsersAC = ReturnType<typeof setUsersAC>
-export const setUsersAC = (users: UserType[])=> {
+export const setUsersAC = (users: UserType[]) => {
     return {
         type: 'SET_USERS',
         users
     } as const
 }
 type ChangeUserStatusAC = ReturnType<typeof changeUserStatusAC>
-export const changeUserStatusAC = (userId: string)=> {
+export const changeUserStatusAC = (userId: string | number) => {
     return {
         type: 'CHANGE_USER_STATUS',
         userId
