@@ -5,9 +5,8 @@ import axios from "axios";
 import {UsersPagePropsType} from "./UsersPageContainer";
 
 export class UsersClass extends React.Component<UsersPagePropsType> {
-    constructor(props: UsersPagePropsType) {
-        super(props);
-
+  
+    componentDidMount() {
         if (this.props.users.length === 0) {
             axios.get('https://social-network.samuraijs.com/api/1.0/users').then(res => this.props.setUsers(res.data.items))
         }
