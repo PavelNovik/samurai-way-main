@@ -19,12 +19,26 @@ export type UserType = {
     uniqueUrlName: null
     status: string | null
 }
-export type UsersStateType = { users: UserType[] }
+export type UsersStateType = {
+    users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+}
 
-export type UserReducerActionType = FollowUserACType | UnfollowUserACType | SetUsersAC | ChangeUserStatusAC
+export type UserReducerActionType =
+    FollowUserACType
+    | UnfollowUserACType
+    | SetUsersAC
+    | ChangeUserStatusAC
+    | ChangeCurrentPageAC
+    | SetTotalUserCountAC
 
 const initialState: UsersStateType = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
     // users: [
     //     {
     //         id: v1(),
@@ -75,16 +89,23 @@ const initialState: UsersStateType = {
 export const userReducer = (state = initialState, action: UserReducerActionType): UsersStateType => {
     switch (action.type) {
         case 'FOLLOW_USER': {
-            return {users: state.users.map(u => u.id === action.userId ? {...u, followed: true} : u)}
+            return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: true} : u)}
         }
         case 'UNFOLLOW_USER': {
-            return {users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)}
+            return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)}
         }
         case 'SET_USERS': {
-            return {users: [...state.users, ...action.users]}
+            // return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
         }
         case 'CHANGE_USER_STATUS': {
-            return {users: state.users.map(u => u.id === action.userId ? {...u, followed: !u.followed} : u)}
+            return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: !u.followed} : u)}
+        }
+        case 'CHANGE_CURRENT_PAGE': {
+            return {...state, currentPage: action.currentPage}
+        }
+        case 'SET_TOTAL_USER_COUNT': {
+            return {...state, totalUsersCount: action.userCount}
         }
         default:
             return state
@@ -119,5 +140,23 @@ export const changeUserStatusAC = (userId: string | number) => {
     return {
         type: 'CHANGE_USER_STATUS',
         userId
+    } as const
+}
+
+type ChangeCurrentPageAC = ReturnType<typeof changeCurrentPageAC>
+
+export const changeCurrentPageAC = (page: number) => {
+    return {
+        type: 'CHANGE_CURRENT_PAGE',
+        currentPage: page
+    } as const
+}
+
+type SetTotalUserCountAC = ReturnType<typeof setTotalUserCountAC>
+
+export const setTotalUserCountAC = (userCount: number) => {
+    return {
+        type: 'SET_TOTAL_USER_COUNT',
+        userCount
     } as const
 }

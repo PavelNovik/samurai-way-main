@@ -5,23 +5,40 @@ import axios from "axios";
 import {UsersPagePropsType} from "./UsersPageContainer";
 
 export class UsersClass extends React.Component<UsersPagePropsType> {
-  
+
     componentDidMount() {
         if (this.props.users.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(res => this.props.setUsers(res.data.items))
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(res => {
+                console.log(res.data)
+                this.props.setUsers(res.data.items)
+                this.props.setTotalUserCount(res.data.totalCount)
+            })
         }
+    }
+
+    onPageChanged(page: number) {
+        this.props.changeCurrentPage(page)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(res => {
+            console.log(res.data)
+            this.props.setUsers(res.data.items)
+        })
     }
 
 
     // getUsers = () => {
     //
     //     if (this.props.users.length === 0) {
-    //         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(res => this.props.setUsers(res.data.items))
+    //         axios.get('https://social-network.samuraijs.com/api/1.0/users?count=5').then(res => this.props.setUsers(res.data.items))
     //     }
     // }
 
     render() {
         // const users = this.props.users
+        const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        const pages = []
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
 
         return (
             <div className={s.users}>
@@ -51,6 +68,18 @@ export class UsersClass extends React.Component<UsersPagePropsType> {
                             </div>
                         )
                     })}
+                </div>
+                <div>
+                    {pages.map(p => {
+
+                        return <span key={p} onClick={() => this.onPageChanged(p)}
+                                     className={this.props.currentPage === p ? s.selectPage + ' ' + s.selectedPage : s.selectPage}>{p}</span>
+                    })}
+                    {/*<span className={s.selectPage + ' ' + s.selectedPage}>1</span>*/}
+                    {/*<span className={s.selectPage}>2</span>*/}
+                    {/*<span className={s.selectPage}>3</span>*/}
+                    {/*<span className={s.selectPage}>4</span>*/}
+                    {/*<span className={s.selectPage}>5</span>*/}
                 </div>
                 <div className={s.usersAction}>
                     <button>Show more</button>

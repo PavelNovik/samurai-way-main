@@ -54,7 +54,16 @@
 }
 
 .usersAction {
-    margin-top: 50px;
+    margin-top: 10px;
     width: 600px;
 }
 
+.selectPage {
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 20px;
+
+}
+.selectedPage {
+    font-weight: bold;
+}
