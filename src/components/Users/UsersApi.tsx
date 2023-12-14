@@ -47,7 +47,9 @@ export class UsersApi extends React.Component<UsersPagePropsType> {
                         onPageChangeButton={this.onPageChangeButton.bind(this)}
                         changeCurrentPage={this.props.changeCurrentPage}
                         setTotalUserCount={this.props.setTotalUserCount}
-                        changeUserStatus={this.props.changeUserStatus}/>
+                        changeUserStatus={this.props.changeUserStatus}
+            // isFetching={this.props.isFetching}
+        />
     }
 }
 

@@ -8,6 +8,7 @@ type UsersFCPropsType = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
+    // isFetching: boolean
     users: UserType[]
     changeUserStatus: (userId: string | number) => void
     changeCurrentPage: (page:number) => void

@@ -24,6 +24,7 @@ export type UsersStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 export type UserReducerActionType =
@@ -33,12 +34,14 @@ export type UserReducerActionType =
     | ChangeUserStatusAC
     | ChangeCurrentPageAC
     | SetTotalUserCountAC
+    | ChangeIsFetchingAC
 
 const initialState: UsersStateType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
+    isFetching: false
     // users: [
     //     {
     //         id: v1(),
@@ -107,6 +110,9 @@ export const userReducer = (state = initialState, action: UserReducerActionType)
         case 'SET_TOTAL_USER_COUNT': {
             return {...state, totalUsersCount: action.userCount}
         }
+        case 'CHANGE_IS_FETCHING': {
+            return {...state, isFetching: action.isFetching}
+        }
         default:
             return state
     }
@@ -158,5 +164,14 @@ export const setTotalUserCountAC = (userCount: number) => {
     return {
         type: 'SET_TOTAL_USER_COUNT',
         userCount
+    } as const
+}
+
+type ChangeIsFetchingAC = ReturnType<typeof changeIsFetchingAC>
+
+export const changeIsFetchingAC = (isFetching: boolean) => {
+    return {
+        type: 'CHANGE_IS_FETCHING',
+        isFetching
     } as const
 }
