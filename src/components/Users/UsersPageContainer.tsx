@@ -1,10 +1,10 @@
 import {connect} from "react-redux";
 // import {Users} from "./Users";
 import {
-    changeCurrentPageAC, changeIsFetchingAC,
-    changeUserStatusAC,
-    followUserAC, setTotalUserCountAC,
-    setUsersAC,
+    changeCurrentPage, changeIsFetching,
+    changeUserStatus,
+    followUser, setTotalUserCount,
+    setUsers, unfollowUser,
     UsersStateType,
     UserType
 } from "../../redux/userReducer";
@@ -18,8 +18,8 @@ import {Preloader} from "../common/Preloader/Preloader";
 
 type MapStateType = UsersStateType
 type MapDispatchType = {
-    onFollow: (userId: string | number) => void
-    onUnfollow: (userId: string | number) => void
+    followUser: (userId: string | number) => void
+    unfollowUser: (userId: string | number) => void
     setUsers: (users: UserType[]) => void
     changeUserStatus: (userId: string | number) => void
     changeCurrentPage: (page: number) => void
@@ -98,16 +98,25 @@ const mapStateToProps = (state: AppStateType): MapStateType => {
         isFetching: state.usersPage.isFetching
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
-    return {
-        onFollow: (userId: string | number) => dispatch(followUserAC(userId)),
-        onUnfollow: (userId: string | number) => dispatch(followUserAC(userId)),
-        setUsers: (users: UserType[]) => dispatch(setUsersAC(users)),
-        changeUserStatus: (userId: string | number) => dispatch(changeUserStatusAC(userId)),
-        changeCurrentPage: (page: number) => dispatch(changeCurrentPageAC(page)),
-        setTotalUserCount: (userCount: number) => dispatch(setTotalUserCountAC(userCount)),
-        changeIsFetching: (isFetching: boolean) => dispatch(changeIsFetchingAC(isFetching))
-    }
-}
+// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
+//     return {
+//         followUser: (userId: string | number) => dispatch(followUser(userId)),
+//         unfollowUser: (userId: string | number) => dispatch(unfollowUser(userId)),
+//         setUsers: (users: UserType[]) => dispatch(setUsers(users)),
+//         changeUserStatus: (userId: string | number) => dispatch(changeUserStatus(userId)),
+//         changeCurrentPage: (page: number) => dispatch(changeCurrentPage(page)),
+//         setTotalUserCount: (userCount: number) => dispatch(setTotalUserCount(userCount)),
+//         changeIsFetching: (isFetching: boolean) => dispatch(changeIsFetching(isFetching))
+//     }
+// }
 // export const UsersPageContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
-export const UsersPageContainer = connect(mapStateToProps, mapDispatchToProps)(UsersApi)
+// export const UsersPageContainer = connect(mapStateToProps, mapDispatchToProps)(UsersApi)
+export const UsersPageContainer = connect(mapStateToProps, {
+    followUser,
+    unfollowUser,
+    setUsers,
+    changeUserStatus,
+    changeCurrentPage,
+    setTotalUserCount,
+    changeIsFetching
+})(UsersApi)

@@ -118,58 +118,58 @@ export const userReducer = (state = initialState, action: UserReducerActionType)
     }
 }
 
-type FollowUserACType = ReturnType<typeof followUserAC>
-export const followUserAC = (userId: string | number) => {
+type FollowUserACType = ReturnType<typeof followUser>
+export const followUser = (userId: string | number) => {
     return {
         type: 'FOLLOW_USER',
         userId
     } as const
 }
 
-type UnfollowUserACType = ReturnType<typeof unfollowUserAC>
-export const unfollowUserAC = (userId: string | number) => {
+type UnfollowUserACType = ReturnType<typeof unfollowUser>
+export const unfollowUser = (userId: string | number) => {
     return {
         type: 'UNFOLLOW_USER',
         userId
     } as const
 }
 
-type SetUsersAC = ReturnType<typeof setUsersAC>
-export const setUsersAC = (users: UserType[]) => {
+type SetUsersAC = ReturnType<typeof setUsers>
+export const setUsers = (users: UserType[]) => {
     return {
         type: 'SET_USERS',
         users
     } as const
 }
-type ChangeUserStatusAC = ReturnType<typeof changeUserStatusAC>
-export const changeUserStatusAC = (userId: string | number) => {
+type ChangeUserStatusAC = ReturnType<typeof changeUserStatus>
+export const changeUserStatus = (userId: string | number) => {
     return {
         type: 'CHANGE_USER_STATUS',
         userId
     } as const
 }
 
-type ChangeCurrentPageAC = ReturnType<typeof changeCurrentPageAC>
+type ChangeCurrentPageAC = ReturnType<typeof changeCurrentPage>
 
-export const changeCurrentPageAC = (page: number) => {
+export const changeCurrentPage = (page: number) => {
     return {
         type: 'CHANGE_CURRENT_PAGE',
         currentPage: page
     } as const
 }
 
-type SetTotalUserCountAC = ReturnType<typeof setTotalUserCountAC>
+type SetTotalUserCountAC = ReturnType<typeof setTotalUserCount>
 
-export const setTotalUserCountAC = (userCount: number) => {
+export const setTotalUserCount = (userCount: number) => {
     return {
         type: 'SET_TOTAL_USER_COUNT',
         userCount
     } as const
 }
 
-type ChangeIsFetchingAC = ReturnType<typeof changeIsFetchingAC>
+type ChangeIsFetchingAC = ReturnType<typeof changeIsFetching>
 
-export const changeIsFetchingAC = (isFetching: boolean) => {
+export const changeIsFetching = (isFetching: boolean) => {
     return {
         type: 'CHANGE_IS_FETCHING',
         isFetching
