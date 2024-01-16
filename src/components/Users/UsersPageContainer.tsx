@@ -8,7 +8,7 @@ import {
     UsersStateType,
     UserType
 } from "../../redux/userReducer";
-import {Dispatch} from "redux";
+// import {Dispatch} from "redux";
 import {AppStateType} from "../../redux/redux-store";
 // import {UsersApi} from "./UsersApi";
 import React from "react";
@@ -35,7 +35,7 @@ class UsersApi extends React.Component<UsersPagePropsType> {
     componentDidMount() {
         this.props.changeIsFetching(true)
         // if (this.props.users.length === 0) {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(res => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials:true}).then(res => {
             console.log(res.data)
             this.props.changeIsFetching(false)
             this.props.setUsers(res.data.items)
@@ -47,7 +47,7 @@ class UsersApi extends React.Component<UsersPagePropsType> {
     onPageChanged(page: number) {
         this.props.changeIsFetching(true)
         this.props.changeCurrentPage(page)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(res => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {withCredentials:true}).then(res => {
             console.log(res.data)
             this.props.setUsers(res.data.items)
             this.props.changeIsFetching(false)
@@ -58,7 +58,7 @@ class UsersApi extends React.Component<UsersPagePropsType> {
         this.props.changeIsFetching(true)
         const nextPage = this.props.currentPage + 1
         this.props.changeCurrentPage(nextPage)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${nextPage}&count=${this.props.pageSize}`).then(res => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${nextPage}&count=${this.props.pageSize}`, {withCredentials:true}).then(res => {
             console.log(res.data)
             this.props.setUsers(res.data.items)
             this.props.changeIsFetching(false)
@@ -78,11 +78,13 @@ class UsersApi extends React.Component<UsersPagePropsType> {
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <UsersFC users={this.props.users} currentPage={this.props.currentPage} pageSize={this.props.pageSize}
-                     totalUsersCount={this.props.totalUsersCount} onPageChanged={this.onPageChanged.bind(this)}
+                     totalUsersCount={this.props.totalUsersCount}
+                     onPageChanged={this.onPageChanged.bind(this)}
                      onPageChangeButton={this.onPageChangeButton.bind(this)}
                      changeCurrentPage={this.props.changeCurrentPage}
                      setTotalUserCount={this.props.setTotalUserCount}
                      changeUserStatus={this.props.changeUserStatus}
+                     followUser={this.props.followUser} unfollowUser={this.props.unfollowUser}
                 // isFetching={this.props.isFetching}
             />
         </>

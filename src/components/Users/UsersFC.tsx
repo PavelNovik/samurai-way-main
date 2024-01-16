@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import pic4 from "../../assets/img/pic4.jpg";
 import {UserType} from "../../redux/userReducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 
 type UsersFCPropsType = {
@@ -12,6 +13,8 @@ type UsersFCPropsType = {
     // isFetching: boolean
     users: UserType[]
     changeUserStatus: (userId: string | number) => void
+    followUser: (userId: string | number) => void
+    unfollowUser: (userId: string | number) => void
     changeCurrentPage: (page: number) => void
     setTotalUserCount: (userCount: number) => void
     onPageChangeButton: () => void
@@ -23,14 +26,42 @@ export const UsersFC = (props: UsersFCPropsType) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
+
+
     return (
         <div className={s.users}>
             <h2>Users</h2>
             {/*<button onClick={this.getUsers}>get users</button>*/}
             <div className={s.usersContainer}>
                 {props.users.map(u => {
-                    const onClickHandler = () => {
-                        props.changeUserStatus(u.id)
+                    const onFollowClickHandler = () => {
+                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                            withCredentials: true, headers: {
+                                "API-KEY": "58d16126-c44d-4aae-84b6-9bdc00838cf2"
+                            }
+                        }).then(res => {
+                            console.log(res)
+                            if (res.data.resultCode === 0) {
+                                props.followUser(u.id)
+                            }
+                        }).catch(e => {
+                            console.log(e)
+                        })
+                    }
+
+                    const onUnfollowClickHandler = () => {
+                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                            withCredentials: true, headers: {
+                                "API-KEY": "58d16126-c44d-4aae-84b6-9bdc00838cf2"
+                            }
+                        }).then(res => {
+                            console.log(res)
+                            if (res.data.resultCode === 0) {
+                                props.unfollowUser(u.id)
+                            }
+                        }).catch(e => {
+                            console.log(e)
+                        })
                     }
                     return (
                         <div key={u.id} className={s.user}>
@@ -38,7 +69,8 @@ export const UsersFC = (props: UsersFCPropsType) => {
                                 <NavLink to={`/profile/${u.id}`}>
                                     <img src={u.photos.small ? u.photos.small : pic4} alt="avatara"/>
                                 </NavLink>
-                                <button onClick={onClickHandler}>{u.followed ? 'Unfollow' : 'Follow'}</button>
+                                {!u.followed && <button onClick={onFollowClickHandler}> Follow</button>}
+                                {u.followed && <button onClick={onUnfollowClickHandler}> Unfollow</button>}
                             </div>
                             <div className={s.userInfo}>
                                 <div className={s.userName}>

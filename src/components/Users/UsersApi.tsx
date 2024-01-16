@@ -43,11 +43,13 @@ export class UsersApi extends React.Component<UsersPagePropsType> {
         // const users = this.props.users
 
         return <UsersFC users={this.props.users} currentPage={this.props.currentPage} pageSize={this.props.pageSize}
-                        totalUsersCount={this.props.totalUsersCount} onPageChanged={this.onPageChanged.bind(this)}
+                        totalUsersCount={this.props.totalUsersCount}
+                        onPageChanged={this.onPageChanged.bind(this)}
                         onPageChangeButton={this.onPageChangeButton.bind(this)}
                         changeCurrentPage={this.props.changeCurrentPage}
                         setTotalUserCount={this.props.setTotalUserCount}
                         changeUserStatus={this.props.changeUserStatus}
+                        unfollowUser={this.props.unfollowUser} followUser={this.props.followUser}
             // isFetching={this.props.isFetching}
         />
     }
