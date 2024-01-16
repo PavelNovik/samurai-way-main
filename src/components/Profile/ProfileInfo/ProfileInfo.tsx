@@ -1,7 +1,24 @@
 import React from 'react';
 import s from './ProfileInfo.module.css'
+import {ProfilePropsType} from "../Profile";
+import {Preloader} from "../../common/Preloader/Preloader";
 
-const ProfileInfo = () => {
+const ProfileInfo = (props: ProfilePropsType) => {
+
+    const userProfileInfo = props.profile ? <div>
+        <img alt={'profile photo'} src={props.profile.photos.large}/>
+        <span>{props.profile.aboutMe}</span>
+        <span>{props.profile.fullName}</span>
+        <div>
+            <span>{props.profile.contacts.facebook}</span>
+            <span>{props.profile.contacts.instagram}</span>
+            <span>{props.profile.contacts.github}</span>
+            <span>{props.profile.contacts.vk}</span>
+            <span>{props.profile.contacts.youtube}</span>
+            <span>{props.profile.contacts.mainLink}</span>
+        </div>
+    </div> : <></>
+
     return (
         <div className={s.profileInfo}>
             <div>
@@ -9,7 +26,9 @@ const ProfileInfo = () => {
                      src={"https://www.casa-pacifica.com/wp-content/uploads/2017/06/cropped-colorful-smoke-artistic-abstract-web-header.jpg"}/>
             </div>
             <div className={s.profileInfoDescription}>
-                ava + description
+                {!props.profile && <Preloader/>}
+                {userProfileInfo}
+                {/*ava + description*/}
             </div>
         </div>
     )

@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./Users.module.css";
 import pic4 from "../../assets/img/pic4.jpg";
 import {UserType} from "../../redux/userReducer";
+import {NavLink} from "react-router-dom";
 
 
 type UsersFCPropsType = {
@@ -11,10 +12,10 @@ type UsersFCPropsType = {
     // isFetching: boolean
     users: UserType[]
     changeUserStatus: (userId: string | number) => void
-    changeCurrentPage: (page:number) => void
+    changeCurrentPage: (page: number) => void
     setTotalUserCount: (userCount: number) => void
-    onPageChangeButton: ()=> void
-    onPageChanged: (page: number)=> void
+    onPageChangeButton: () => void
+    onPageChanged: (page: number) => void
 }
 export const UsersFC = (props: UsersFCPropsType) => {
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -34,7 +35,9 @@ export const UsersFC = (props: UsersFCPropsType) => {
                     return (
                         <div key={u.id} className={s.user}>
                             <div className={s.userAction}>
-                                <img src={u.photos.small ? u.photos.small : pic4} alt="avatara"/>
+                                <NavLink to={`/profile/${u.id}`}>
+                                    <img src={u.photos.small ? u.photos.small : pic4} alt="avatara"/>
+                                </NavLink>
                                 <button onClick={onClickHandler}>{u.followed ? 'Unfollow' : 'Follow'}</button>
                             </div>
                             <div className={s.userInfo}>

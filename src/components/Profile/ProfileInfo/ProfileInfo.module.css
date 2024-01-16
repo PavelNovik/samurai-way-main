@@ -4,4 +4,9 @@
 
 .profileInfoDescription {
     padding: 10px;
+
+    & img {
+        width: 200px;
+        border-radius: 50%;
+    }
 }
