@@ -12,9 +12,9 @@ import {
 import {AppStateType} from "../../redux/redux-store";
 // import {UsersApi} from "./UsersApi";
 import React from "react";
-import axios from "axios";
 import {UsersFC} from "./UsersFC";
 import {Preloader} from "../common/Preloader/Preloader";
+import { usersAPI} from "../../api/user-api";
 
 type MapStateType = UsersStateType
 type MapDispatchType = {
@@ -35,34 +35,37 @@ class UsersApi extends React.Component<UsersPagePropsType> {
     componentDidMount() {
         this.props.changeIsFetching(true)
         // if (this.props.users.length === 0) {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials:true}).then(res => {
-            console.log(res.data)
-            this.props.changeIsFetching(false)
-            this.props.setUsers(res.data.items)
-            this.props.setTotalUserCount(res.data.totalCount)
-        })
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
+                console.log(data)
+                this.props.changeIsFetching(false)
+                this.props.setUsers(data.items)
+                this.props.setTotalUserCount(data.totalCount)
+            })
         // }
     }
 
     onPageChanged(page: number) {
         this.props.changeIsFetching(true)
         this.props.changeCurrentPage(page)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {withCredentials:true}).then(res => {
-            console.log(res.data)
-            this.props.setUsers(res.data.items)
-            this.props.changeIsFetching(false)
-        })
+        usersAPI.getUsers(page, this.props.pageSize)
+            .then(data => {
+                console.log(data)
+                this.props.setUsers(data.items)
+                this.props.changeIsFetching(false)
+            })
     }
 
     onPageChangeButton() {
         this.props.changeIsFetching(true)
         const nextPage = this.props.currentPage + 1
         this.props.changeCurrentPage(nextPage)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${nextPage}&count=${this.props.pageSize}`, {withCredentials:true}).then(res => {
-            console.log(res.data)
-            this.props.setUsers(res.data.items)
-            this.props.changeIsFetching(false)
-        })
+        usersAPI.getUsers(nextPage, this.props.pageSize)
+            .then(data => {
+                console.log(data)
+                this.props.setUsers(data.items)
+                this.props.changeIsFetching(false)
+            })
     }
 
     // getUsers = () => {
