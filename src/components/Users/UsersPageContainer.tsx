@@ -4,7 +4,7 @@ import {
     changeCurrentPage, changeIsFetching,
     changeUserStatus,
     followUser, setTotalUserCount,
-    setUsers, unfollowUser,
+    setUsers, toggleIsFollowingProgress, unfollowUser,
     UsersStateType,
     UserType
 } from "../../redux/userReducer";
@@ -14,7 +14,7 @@ import {AppStateType} from "../../redux/redux-store";
 import React from "react";
 import {UsersFC} from "./UsersFC";
 import {Preloader} from "../common/Preloader/Preloader";
-import { usersAPI} from "../../api/user-api";
+import {usersAPI} from "../../api/user-api";
 
 type MapStateType = UsersStateType
 type MapDispatchType = {
@@ -25,6 +25,7 @@ type MapDispatchType = {
     changeCurrentPage: (page: number) => void
     setTotalUserCount: (userCount: number) => void
     changeIsFetching: (isFetching: boolean) => void
+    toggleIsFollowingProgress: (isFollowingProgress: boolean, id: number | string) => void
 }
 
 export type UsersPagePropsType = MapStateType & MapDispatchType
@@ -37,7 +38,6 @@ class UsersApi extends React.Component<UsersPagePropsType> {
         // if (this.props.users.length === 0) {
         usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
             .then(data => {
-                console.log(data)
                 this.props.changeIsFetching(false)
                 this.props.setUsers(data.items)
                 this.props.setTotalUserCount(data.totalCount)
@@ -80,14 +80,19 @@ class UsersApi extends React.Component<UsersPagePropsType> {
 
         return <>
             {this.props.isFetching ? <Preloader/> : null}
-            <UsersFC users={this.props.users} currentPage={this.props.currentPage} pageSize={this.props.pageSize}
+            <UsersFC users={this.props.users}
+                     currentPage={this.props.currentPage}
+                     pageSize={this.props.pageSize}
+                     followingInProgress={this.props.followingInProgress}
                      totalUsersCount={this.props.totalUsersCount}
                      onPageChanged={this.onPageChanged.bind(this)}
                      onPageChangeButton={this.onPageChangeButton.bind(this)}
                      changeCurrentPage={this.props.changeCurrentPage}
                      setTotalUserCount={this.props.setTotalUserCount}
                      changeUserStatus={this.props.changeUserStatus}
-                     followUser={this.props.followUser} unfollowUser={this.props.unfollowUser}
+                     followUser={this.props.followUser}
+                     unfollowUser={this.props.unfollowUser}
+                     toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
                 // isFetching={this.props.isFetching}
             />
         </>
@@ -100,7 +105,8 @@ const mapStateToProps = (state: AppStateType): MapStateType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 // const mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
@@ -123,5 +129,6 @@ export const UsersPageContainer = connect(mapStateToProps, {
     changeUserStatus,
     changeCurrentPage,
     setTotalUserCount,
-    changeIsFetching
+    changeIsFetching,
+    toggleIsFollowingProgress
 })(UsersApi)

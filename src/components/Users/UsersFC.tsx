@@ -10,6 +10,7 @@ type UsersFCPropsType = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
+    followingInProgress: Array<number | string>
     // isFetching: boolean
     users: UserType[]
     changeUserStatus: (userId: string | number) => void
@@ -19,6 +20,7 @@ type UsersFCPropsType = {
     setTotalUserCount: (userCount: number) => void
     onPageChangeButton: () => void
     onPageChanged: (page: number) => void
+    toggleIsFollowingProgress: (isFollowingProgress: boolean, id: number | string) => void
 }
 export const UsersFC = (props: UsersFCPropsType) => {
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -35,6 +37,7 @@ export const UsersFC = (props: UsersFCPropsType) => {
             <div className={s.usersContainer}>
                 {props.users.map(u => {
                     const onFollowClickHandler = () => {
+                        props.toggleIsFollowingProgress(true, u.id)
                         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                             withCredentials: true, headers: {
                                 "API-KEY": "58d16126-c44d-4aae-84b6-9bdc00838cf2"
@@ -46,10 +49,11 @@ export const UsersFC = (props: UsersFCPropsType) => {
                             }
                         }).catch(e => {
                             console.log(e)
-                        })
+                        }).finally(() => props.toggleIsFollowingProgress(false,u.id))
                     }
 
                     const onUnfollowClickHandler = () => {
+                        props.toggleIsFollowingProgress(true, u.id)
                         axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                             withCredentials: true, headers: {
                                 "API-KEY": "58d16126-c44d-4aae-84b6-9bdc00838cf2"
@@ -61,7 +65,7 @@ export const UsersFC = (props: UsersFCPropsType) => {
                             }
                         }).catch(e => {
                             console.log(e)
-                        })
+                        }).finally(() => props.toggleIsFollowingProgress(false,u.id))
                     }
                     return (
                         <div key={u.id} className={s.user}>
@@ -69,8 +73,10 @@ export const UsersFC = (props: UsersFCPropsType) => {
                                 <NavLink to={`/profile/${u.id}`}>
                                     <img src={u.photos.small ? u.photos.small : pic4} alt="avatara"/>
                                 </NavLink>
-                                {!u.followed && <button onClick={onFollowClickHandler}> Follow</button>}
-                                {u.followed && <button onClick={onUnfollowClickHandler}> Unfollow</button>}
+                                {!u.followed && <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                                        onClick={onFollowClickHandler}> Follow</button>}
+                                {u.followed && <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                                       onClick={onUnfollowClickHandler}> Unfollow</button>}
                             </div>
                             <div className={s.userInfo}>
                                 <div className={s.userName}>

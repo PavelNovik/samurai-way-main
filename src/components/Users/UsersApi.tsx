@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from "axios";
 import {UsersPagePropsType} from "./UsersPageContainer";
-import {UsersFC} from "./UsersFC";
+// import {UsersFC} from "./UsersFC";
 
 export class UsersApi extends React.Component<UsersPagePropsType> {
 
@@ -40,18 +40,22 @@ export class UsersApi extends React.Component<UsersPagePropsType> {
     // }
 
     render() {
+        return <></>
         // const users = this.props.users
 
-        return <UsersFC users={this.props.users} currentPage={this.props.currentPage} pageSize={this.props.pageSize}
-                        totalUsersCount={this.props.totalUsersCount}
-                        onPageChanged={this.onPageChanged.bind(this)}
-                        onPageChangeButton={this.onPageChangeButton.bind(this)}
-                        changeCurrentPage={this.props.changeCurrentPage}
-                        setTotalUserCount={this.props.setTotalUserCount}
-                        changeUserStatus={this.props.changeUserStatus}
-                        unfollowUser={this.props.unfollowUser} followUser={this.props.followUser}
-            // isFetching={this.props.isFetching}
-        />
+        // return <UsersFC users={this.props.users}
+        //                 currentPage={this.props.currentPage}
+        //                 pageSize={this.props.pageSize}
+        //                 followingInProgress={this.props.followingInProgress}
+        //                 totalUsersCount={this.props.totalUsersCount}
+        //                 onPageChanged={this.onPageChanged.bind(this)}
+        //                 onPageChangeButton={this.onPageChangeButton.bind(this)}
+        //                 changeCurrentPage={this.props.changeCurrentPage}
+        //                 setTotalUserCount={this.props.setTotalUserCount}
+        //                 changeUserStatus={this.props.changeUserStatus}
+        //                 unfollowUser={this.props.unfollowUser} followUser={this.props.followUser}
+        //     // isFetching={this.props.isFetching}
+        // />
     }
 }
 
