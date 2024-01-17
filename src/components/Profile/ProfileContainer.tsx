@@ -31,8 +31,6 @@ class ProfileContainer extends React.Component<CommonPropsType> {
     }
 }
 
-const AuthRedirectComponent = withRedirect(ProfileContainer)
-
 const mapStateToProps = (state: AppStateType): MapStateType => ({
     profile: state.profilePage.profile,
     posts: state.profilePage.posts,
@@ -46,6 +44,6 @@ type PathParamsType = {
     userId: string
 }
 
-const WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
+const WithUrlDataContainerComponent = withRouter(ProfileContainer)
 
-export default connect(mapStateToProps, {setUserProfileTC})(WithUrlDataContainerComponent);
+export default withRedirect(connect(mapStateToProps, {setUserProfileTC})(WithUrlDataContainerComponent));
