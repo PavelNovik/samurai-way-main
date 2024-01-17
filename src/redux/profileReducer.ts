@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {profileAPI} from "../api/profile-api";
 
 export type PostsType = {
     id: string
@@ -88,4 +90,10 @@ export const setUserProfile = (profile: any) => {
         type: 'SET-USER-PROFILE',
         profile
     } as const
+}
+
+export const setUserProfileTC = (userId: string | number) => (dispatch: Dispatch)=> {
+    profileAPI.getProfileUsers(userId).then(data => {
+        if(data) dispatch(setUserProfile(data))
+    }).catch(e => console.log(e))
 }
