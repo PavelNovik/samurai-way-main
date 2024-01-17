@@ -19,7 +19,7 @@ const Messages: FC<MessagesPropsType> = (props) => {
     const messagesList = props.messages.map(m => <Message key={m.id} message={m.message} avatar={m.src}
                                                           isUser={m.isUser}/>)
 
-    if(!props.isAuth) return <Redirect to={'/login'}/>
+    // if(!props.isAuth) return <Redirect to={'/login'}/>
     return (
         <div className={s.messages}>
             {messagesList}

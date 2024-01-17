@@ -7,7 +7,6 @@ import {AuthReducerStateType} from "../../redux/auth-reducer";
 export const Header = (props: AuthReducerStateType) => {
 
     // console.log(props.email, props.id, props.login)
-
     return (
         <header className={classes.header}>
             <img

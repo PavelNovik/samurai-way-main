@@ -38,7 +38,7 @@ export const setAuthUserData = (data: AuthReducerStateType) => {
 
 export const setAuthUserDataTC = () => (dispatch: Dispatch) => {
     authAPI.getAuthData().then((data) => {
-            if (data.data) {
+            if (data.resultCode === 0) {
                 dispatch(setAuthUserData(data.data))
             }
         }
