@@ -1,8 +1,9 @@
-import {v1} from "uuid";
-import pic1 from '../assets/img/pic1.svg'
-import pic2 from '../assets/img/pic2.svg'
-import pic3 from '../assets/img/pic3.jpg'
-import pic4 from '../assets/img/pic4.jpg'
+// import pic1 from '../assets/img/pic1.svg'
+// import pic2 from '../assets/img/pic2.svg'
+// import pic3 from '../assets/img/pic3.jpg'
+// import pic4 from '../assets/img/pic4.jpg'
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/user-api";
 
 export type UserType = {
     id: string | number
@@ -44,52 +45,7 @@ const initialState: UsersStateType = {
     currentPage: 1,
     isFetching: false,
     followingInProgress: []
-    // users: [
-    //     {
-    //         id: v1(),
-    //         avatar: pic1,
-    //         isFollow: false,
-    //         name: 'Dmitry K.',
-    //         location: {
-    //             country: 'Belarus',
-    //             city: 'Minsk',
-    //         },
-    //         status: 'I am looking for a Job right now...'
-    //     },
-    //     {
-    //         id: v1(),
-    //         avatar: pic2,
-    //         isFollow: false,
-    //         name: 'Svetlana D.',
-    //         location: {
-    //             country: 'Belarus',
-    //             city: 'Minsk',
-    //         },
-    //         status: 'I am so pretty'
-    //     },
-    //     {
-    //         id: v1(),
-    //         avatar: pic3,
-    //         isFollow: true,
-    //         name: 'Sergei S.',
-    //         location: {
-    //             country: 'Ukraine',
-    //             city: 'Kiev',
-    //         },
-    //         status: 'I like football!!!'
-    //     },
-    //     {
-    //         id: v1(),
-    //         avatar: pic4,
-    //         isFollow: true,
-    //         name: 'Andrew T.',
-    //         location: {
-    //             country: 'United States',
-    //             city: 'Philadelphia',
-    //         },
-    //         status: 'I am free to help you to create good Video Production'
-    //     }
-    // ]
+
 }
 export const userReducer = (state = initialState, action: UserReducerActionType): UsersStateType => {
     switch (action.type) {
@@ -192,4 +148,48 @@ export const toggleIsFollowingProgress = (isFollowingProgress: boolean, id: stri
         isFollowingProgress,
         id
     } as const
+}
+
+export const getUsersTC = (currentPage: number, pageSize: number) =>(dispatch: Dispatch) => {
+    dispatch(changeIsFetching(true))
+    usersAPI.getUsers(currentPage, pageSize)
+        .then(data => {
+            dispatch(changeIsFetching(false))
+            dispatch(setUsers(data.items))
+            dispatch(setTotalUserCount(data.totalCount))
+        })
+}
+export const changePageTC = (page: number, pageSize: number) =>(dispatch: Dispatch) => {
+    dispatch(changeIsFetching(true))
+    dispatch(changeCurrentPage(page))
+    usersAPI.getUsers(page, pageSize)
+        .then(data => {
+            dispatch(changeIsFetching(false))
+            dispatch(setUsers(data.items))
+        })
+}
+export const followUserTC = (userId: number | string) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFollowingProgress(true, userId))
+    usersAPI.follow(userId).then(data => {
+        console.log(data)
+        if (data.resultCode === 0) {
+            dispatch(followUser(userId))
+        }
+    }).catch(e => {
+        console.log(e)
+    }).finally(() => {
+        dispatch(toggleIsFollowingProgress(false, userId))
+    })
+}
+
+export const unfollowUserTC = (userId: number | string) => (dispatch: Dispatch) => {
+    dispatch(toggleIsFollowingProgress(true, userId))
+    usersAPI.unfollow(userId).then(data => {
+        console.log(data)
+        if (data.resultCode === 0) {
+            dispatch(unfollowUser(userId))
+        }
+    }).catch(e => {
+        console.log(e)
+    }).finally(() => dispatch(toggleIsFollowingProgress(false,userId)))
 }

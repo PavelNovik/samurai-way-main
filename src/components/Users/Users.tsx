@@ -11,55 +11,10 @@ import axios from "axios";
 export function Users(props: UsersPagePropsType) {
 
     useEffect(() => {
-        if (props.users.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(res => props.setUsers(res.data.items))
-            // props.setUsers([
-            //     {
-            //         id: v1(),
-            //         avatar: pic1,
-            //         isFollow: false,
-            //         name: 'Dmitry K.',
-            //         location: {
-            //             country: 'Belarus',
-            //             city: 'Minsk',
-            //         },
-            //         status: 'I am looking for a Job right now...'
-            //     },
-            //     {
-            //         id: v1(),
-            //         avatar: pic2,
-            //         isFollow: false,
-            //         name: 'Svetlana D.',
-            //         location: {
-            //             country: 'Belarus',
-            //             city: 'Minsk',
-            //         },
-            //         status: 'I am so pretty'
-            //     },
-            //     {
-            //         id: v1(),
-            //         avatar: pic3,
-            //         isFollow: true,
-            //         name: 'Sergei S.',
-            //         location: {
-            //             country: 'Ukraine',
-            //             city: 'Kiev',
-            //         },
-            //         status: 'I like football!!!'
-            //     },
-            //     {
-            //         id: v1(),
-            //         avatar: pic4,
-            //         isFollow: true,
-            //         name: 'Andrew T.',
-            //         location: {
-            //             country: 'United States',
-            //             city: 'Philadelphia',
-            //         },
-            //         status: 'I am free to help you to create good Video Production'
-            //     }
-            // ])
-        }
+        // if (props.users.length === 0) {
+        //     axios.get('https://social-network.samuraijs.com/api/1.0/users').then(res => props.setUsers(res.data.items))
+        //
+        // }
     }, [props]);
 
     const users = props.users

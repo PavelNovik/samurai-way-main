@@ -6,31 +6,31 @@ import {UsersPagePropsType} from "./UsersPageContainer";
 export class UsersApi extends React.Component<UsersPagePropsType> {
 
     componentDidMount() {
-        if (this.props.users.length === 0) {
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(res => {
-                console.log(res.data)
-                this.props.setUsers(res.data.items)
-                this.props.setTotalUserCount(res.data.totalCount)
-            })
-        }
+        // if (this.props.users.length === 0) {
+        //     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(res => {
+        //         console.log(res.data)
+        //         this.props.setUsers(res.data.items)
+        //         this.props.setTotalUserCount(res.data.totalCount)
+        //     })
+        // }
     }
 
-    onPageChanged(page: number) {
-        this.props.changeCurrentPage(page)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(res => {
-            console.log(res.data)
-            this.props.setUsers(res.data.items)
-        })
-    }
-
-    onPageChangeButton() {
-        const nextPage = this.props.currentPage + 1
-        this.props.changeCurrentPage(nextPage)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${nextPage}&count=${this.props.pageSize}`).then(res => {
-            console.log(res.data)
-            this.props.setUsers(res.data.items)
-        })
-    }
+    // onPageChanged(page: number) {
+    //     this.props.changeCurrentPage(page)
+    //     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(res => {
+    //         console.log(res.data)
+    //         this.props.setUsers(res.data.items)
+    //     })
+    // }
+    //
+    // onPageChangeButton() {
+    //     const nextPage = this.props.currentPage + 1
+    //     this.props.changeCurrentPage(nextPage)
+    //     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${nextPage}&count=${this.props.pageSize}`).then(res => {
+    //         console.log(res.data)
+    //         this.props.setUsers(res.data.items)
+    //     })
+    // }
 
     // getUsers = () => {
     //

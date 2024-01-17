@@ -3,8 +3,6 @@ import s from "./Users.module.css";
 import pic4 from "../../assets/img/pic4.jpg";
 import {UserType} from "../../redux/userReducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-
 
 type UsersFCPropsType = {
     totalUsersCount: number
@@ -14,13 +12,10 @@ type UsersFCPropsType = {
     // isFetching: boolean
     users: UserType[]
     changeUserStatus: (userId: string | number) => void
-    followUser: (userId: string | number) => void
-    unfollowUser: (userId: string | number) => void
-    changeCurrentPage: (page: number) => void
-    setTotalUserCount: (userCount: number) => void
     onPageChangeButton: () => void
     onPageChanged: (page: number) => void
-    toggleIsFollowingProgress: (isFollowingProgress: boolean, id: number | string) => void
+    followUserTC: (userId: string | number) => void
+    unfollowUserTC: (userId: string | number) => void
 }
 export const UsersFC = (props: UsersFCPropsType) => {
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -37,35 +32,11 @@ export const UsersFC = (props: UsersFCPropsType) => {
             <div className={s.usersContainer}>
                 {props.users.map(u => {
                     const onFollowClickHandler = () => {
-                        props.toggleIsFollowingProgress(true, u.id)
-                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                            withCredentials: true, headers: {
-                                "API-KEY": "58d16126-c44d-4aae-84b6-9bdc00838cf2"
-                            }
-                        }).then(res => {
-                            console.log(res)
-                            if (res.data.resultCode === 0) {
-                                props.followUser(u.id)
-                            }
-                        }).catch(e => {
-                            console.log(e)
-                        }).finally(() => props.toggleIsFollowingProgress(false,u.id))
+                        props.followUserTC(u.id)
                     }
 
                     const onUnfollowClickHandler = () => {
-                        props.toggleIsFollowingProgress(true, u.id)
-                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                            withCredentials: true, headers: {
-                                "API-KEY": "58d16126-c44d-4aae-84b6-9bdc00838cf2"
-                            }
-                        }).then(res => {
-                            console.log(res)
-                            if (res.data.resultCode === 0) {
-                                props.unfollowUser(u.id)
-                            }
-                        }).catch(e => {
-                            console.log(e)
-                        }).finally(() => props.toggleIsFollowingProgress(false,u.id))
+                        props.unfollowUserTC(u.id)
                     }
                     return (
                         <div key={u.id} className={s.user}>
