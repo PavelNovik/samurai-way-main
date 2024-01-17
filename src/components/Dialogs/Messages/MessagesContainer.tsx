@@ -9,17 +9,19 @@ import {Dispatch} from "redux";
 type MapStatePropsType = {
     messages: MessagesType[]
     newMessageText: string
+    isAuth: boolean
 }
 type MapDispatchPropsType = {
     updateNewMessageText:(text: string)=> void
     addNewMessage:()=> void
-}
+    }
 
 export type MessagesPropsType = MapStatePropsType & MapDispatchPropsType
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         messages: state.messagesPage.messages,
-        newMessageText: state.messagesPage.newMessageText
+        newMessageText: state.messagesPage.newMessageText,
+        isAuth: state.auth.isAuth
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType  => {

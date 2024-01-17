@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import classes from './Header.module.css';
 import {NavLink} from "react-router-dom";
 import {AuthReducerStateType} from "../../redux/auth-reducer";

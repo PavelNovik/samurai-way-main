@@ -2,15 +2,8 @@ import React, {FC, useRef} from 'react';
 import Message from "./Message/Message";
 import s from "./Messages.module.css"
 import {MessagesPropsType} from "./MessagesContainer";
-// import {MessagesType} from "../../../redux/messagesReducer";
+import {Redirect} from "react-router-dom";
 
-
-// type MessagesPropsType = {
-//     messages: MessagesType[]
-//     newMessageText: string
-//     updateNewMessageText: (text: string) => void
-//     addNewMessage: () => void
-// }
 const Messages: FC<MessagesPropsType> = (props) => {
     const ref = useRef<HTMLTextAreaElement>(null)
 
@@ -25,6 +18,8 @@ const Messages: FC<MessagesPropsType> = (props) => {
 
     const messagesList = props.messages.map(m => <Message key={m.id} message={m.message} avatar={m.src}
                                                           isUser={m.isUser}/>)
+
+    if(!props.isAuth) return <Redirect to={'/login'}/>
     return (
         <div className={s.messages}>
             {messagesList}
