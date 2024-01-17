@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {ProfilePageType, setUserProfileTC} from "../../redux/profileReducer";
@@ -6,6 +6,7 @@ import {AppStateType} from "../../redux/redux-store";
 import {withRouter} from "react-router";
 import {RouteComponentProps} from "react-router-dom";
 import {withRedirect} from "../../hoc/withRedirect";
+import {compose} from "redux";
 
 export type ProfileContainerPropsType = MapStateType & MapDispatchType
 type MapDispatchType = {
@@ -44,6 +45,8 @@ type PathParamsType = {
     userId: string
 }
 
-const WithUrlDataContainerComponent = withRouter(ProfileContainer)
+// const WithUrlDataContainerComponent = withRouter(ProfileContainer)
 
-export default withRedirect(connect(mapStateToProps, {setUserProfileTC})(WithUrlDataContainerComponent));
+// export default withRedirect(connect(mapStateToProps, {setUserProfileTC})(WithUrlDataContainerComponent));
+
+export default compose<ComponentType>(withRedirect,connect(mapStateToProps, {setUserProfileTC}),withRouter)(ProfileContainer)

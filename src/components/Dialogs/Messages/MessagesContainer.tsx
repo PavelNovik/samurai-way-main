@@ -2,8 +2,9 @@ import {addMessageAC, MessagesType, updateNewMessageTextAC} from "../../../redux
 import Messages from "./Messages";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {withRedirect} from "../../../hoc/withRedirect";
+import {ComponentType} from "react";
 
 
 type MapStatePropsType = {
@@ -28,9 +29,13 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
         addNewMessage: () => dispatch(addMessageAC())
     }
 }
-const MessagesRedirectComponent = withRedirect(Messages)
-
-const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(MessagesRedirectComponent)
 
 
-export default MessagesContainer;
+// const MessagesRedirectComponent = withRedirect(Messages)
+//
+// const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(MessagesRedirectComponent)
+
+// export default MessagesContainer;
+
+export default compose<ComponentType>(connect(mapStateToProps, mapDispatchToProps),
+    withRedirect)(Messages)
