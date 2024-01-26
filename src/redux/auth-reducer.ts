@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/auth-api";
+import {setUserProfileTC} from "./profileReducer";
 
 export type AuthReducerStateType = {
     id: null | string

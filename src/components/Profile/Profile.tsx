@@ -9,14 +9,14 @@ import {Redirect} from "react-router-dom";
 export type ProfilePropsType = {
     // children?: React.ReactNode
     profile: ProfileType | null
-
-
+    status: string
+    updateProfileStatus: (status: string)=> void
 }
 const Profile = (props: ProfilePropsType) => {
 
     return (
         <div className={styles.content}>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo status={props.status} profile={props.profile} updateProfileStatus={props.updateProfileStatus} />
             <MyPostsContainer/>
         </div>
     );

@@ -12,6 +12,9 @@ const instance = axios.create({
 
 export const authAPI = {
     getAuthData: () =>  {
-        return instance.get(`auth/me`).then(res => res.data)
+        return instance.get(`auth/me`).then(res => {
+            console.log(res)
+          return   res.data
+        })
     }
 }

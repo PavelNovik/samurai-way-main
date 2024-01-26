@@ -29,7 +29,7 @@ const ProfileInfo = (props: ProfilePropsType) => {
             </div>
             <div className={s.profileInfoDescription}>
                 {!props.profile && <Preloader/>}
-                <ProfileStatus status={'Hello everybody :)'}/>
+                <ProfileStatus updateProfileStatus={props.updateProfileStatus} status={props.status}/>
                 {userProfileInfo}
                 {/*ava + description*/}
             </div>
