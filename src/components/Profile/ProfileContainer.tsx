@@ -19,7 +19,6 @@ type MapStateType = ProfilePageType
 class ProfileContainer extends React.Component<CommonPropsType> {
 
     componentDidMount() {
-        console.log(this.props)
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = '30269'

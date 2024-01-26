@@ -1,4 +1,4 @@
-import React, {ChangeEvent, LegacyRef, RefObject} from 'react';
+import React, {ChangeEvent} from 'react';
 
 type Props = {
     status: string
@@ -6,7 +6,7 @@ type Props = {
 }
 
 export class ProfileStatus extends React.Component<Props> {
-    statusInputRef = React.createRef<HTMLInputElement>()
+    // statusInputRef = React.createRef<HTMLInputElement>()
 
     state = {
         editMode: false,
@@ -29,6 +29,12 @@ export class ProfileStatus extends React.Component<Props> {
         this.setState({status: e.currentTarget.value})
     }
 
+    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<typeof this.state>) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({status: this.props.status})
+        }
+    }
+
     render() {
 
         return (
@@ -39,7 +45,7 @@ export class ProfileStatus extends React.Component<Props> {
                 {this.state.editMode && <div onBlur={() => this.deactivateEditMode()}>
                     <input value={this.state.status}
                            onChange={this.onStatusChange}
-                           // ref={this.statusInputRef}
+                        // ref={this.statusInputRef}
                            autoFocus={true} type="text" placeholder={'Enter your status'}/>
                     <button onClick={this.onSubmitStatus}>Send</button>
                 </div>}
