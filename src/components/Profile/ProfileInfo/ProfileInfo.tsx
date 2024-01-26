@@ -2,11 +2,13 @@ import React from 'react';
 import s from './ProfileInfo.module.css'
 import {ProfilePropsType} from "../Profile";
 import {Preloader} from "../../common/Preloader/Preloader";
+import avatar from './../../../assets/img/pic6.jpg'
+import {ProfileStatus} from "../ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props: ProfilePropsType) => {
 
     const userProfileInfo = props.profile ? <div>
-        <img alt={'profile photo'} src={props.profile.photos.large}/>
+        <img alt={'profile photo'} src={props.profile.photos.large ? props.profile.photos.large : avatar}/>
         <span>{props.profile.aboutMe}</span>
         <span>{props.profile.fullName}</span>
         <div>
@@ -27,6 +29,7 @@ const ProfileInfo = (props: ProfilePropsType) => {
             </div>
             <div className={s.profileInfoDescription}>
                 {!props.profile && <Preloader/>}
+                <ProfileStatus status={'Hello everybody :)'}/>
                 {userProfileInfo}
                 {/*ava + description*/}
             </div>
