@@ -1,6 +1,11 @@
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
-const LoginForm = (props: InjectedFormProps<{}, {}, string>) => {
+export type FormData = {
+    login: string
+    password: string
+    remeberMe: boolean
+}
+const LoginForm = (props: InjectedFormProps<FormData>) => {
     return (
         <div>
             <form onSubmit={props.handleSubmit}>
@@ -21,7 +26,7 @@ const LoginForm = (props: InjectedFormProps<{}, {}, string>) => {
     );
 };
 
-export const LoginReduxForm = reduxForm({
+export const LoginReduxForm = reduxForm<FormData>({
     // a unique name for the form
     form: 'login'
 })(LoginForm)

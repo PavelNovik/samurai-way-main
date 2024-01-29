@@ -31,7 +31,6 @@ const ProfileInfo = (props: ProfilePropsType) => {
                 {!props.profile && <Preloader/>}
                 <ProfileStatus updateProfileStatus={props.updateProfileStatus} status={props.status}/>
                 {userProfileInfo}
-                {/*ava + description*/}
             </div>
         </div>
     )

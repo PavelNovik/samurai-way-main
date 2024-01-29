@@ -1,31 +1,23 @@
-import React, {createRef, FC} from 'react';
+import React, {FC} from 'react';
 import styles from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {MyPostPropsType} from "./MyPostsContainer";
+import {PostDataT, PostReduxForm} from "./Post/PostForm";
 
-const MyPosts: FC<MyPostPropsType> = ({posts, newPostText, addNewPost, updateNewPostText}) => {
+const MyPosts: FC<MyPostPropsType> = ({posts, addNewPost}) => {
 
     const postsList = posts.map(p => <Post key={p.id} message={p.message} likes={p.likes}/>)
 
-    const newPostElement = createRef<HTMLTextAreaElement>()
-    const addNewPostHandler = () => {
-        addNewPost()
+    // const newPostElement = createRef<HTMLTextAreaElement>()
+    const addNewPostHandler = (data: PostDataT) => {
+        console.log(data)
+        addNewPost(data.post)
     }
 
-    const onPostChangeHandler = () => {
-        const text = newPostElement.current?.value
-        updateNewPostText(text ? text : '')
-    }
 
     return (
         <div>My posts
-            <div>
-                {/*<textarea ref={textareaRef} placeholder={'your news...'}/>*/}
-                <textarea ref={newPostElement} value={newPostText} placeholder={'your post...'}
-                          onChange={onPostChangeHandler}/>
-                {/*<button onClick={()=> console.log(el.value)}>Add Post</button>*/}
-                <button onClick={addNewPostHandler}>Add Post</button>
-            </div>
+            <PostReduxForm onSubmit={addNewPostHandler}/>
             <div className={styles.posts}>
                 {postsList}
             </div>
