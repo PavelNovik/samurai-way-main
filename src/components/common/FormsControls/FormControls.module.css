@@ -1,0 +1,17 @@
+.formControl.error {
+
+    span {
+        color: red;
+    }
+
+    textarea, input {
+        border: 1px solid red;
+        border-radius: 5px;
+    }
+
+}
+.formControl {
+    span {
+        display: inline-block;
+    }
+}
