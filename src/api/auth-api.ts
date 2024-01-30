@@ -1,4 +1,5 @@
 import axios from "axios";
+import {FormData} from "../components/Login/LoginForm";
 
 
 const instance = axios.create({
@@ -13,6 +14,16 @@ const instance = axios.create({
 export const authAPI = {
     getAuthData: () => {
         return instance.get(`auth/me`).then(res => {
+            return res.data
+        })
+    },
+    loginUser: (data: FormData)=> {
+        return instance.post(`auth/login`, data).then(res => {
+            return res.data
+        })
+    },
+    logoutUser: ()=> {
+        return instance.delete(`auth/login`).then(res => {
             return res.data
         })
     }

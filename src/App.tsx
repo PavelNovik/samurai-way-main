@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-// import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
 import News from "./components/News/News";
@@ -11,7 +10,7 @@ import NavbarContainer from "./components/Navbar/NavbarContainer";
 import {UsersPageContainer} from "./components/Users/UsersPageContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import {Login} from "./components/Login/Login";
+import LoginContainer from "./components/Login/LoginContainer";
 
 
 function App() {
@@ -35,7 +34,7 @@ function App() {
                 <Route path={'/news'} component={News}/>
                 <Route path={'/music'} component={Music}/>
                 <Route path={'/settings'} component={Settings}/>
-                <Route path={'/login'} component={Login}/>
+                <Route path={'/login'} component={LoginContainer}/>
             </div>
         </div>
 
