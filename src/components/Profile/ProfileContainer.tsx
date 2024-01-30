@@ -12,16 +12,17 @@ export type ProfileContainerPropsType = MapStateType & MapDispatchType
 type MapDispatchType = {
     setUserProfileTC: (userId: string | number) => void
     getProfileStatusTC: (userId: string | number) => void
-    updateProfileStatusTC: (status: string)=> void
+    updateProfileStatusTC: (status: string) => void
 }
-type MapStateType = ProfilePageType
+type MapStateType = ProfilePageType & { userId: string | null }
 
 class ProfileContainer extends React.Component<CommonPropsType> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = '30269'
+
+            userId = this.props.userId ? this.props.userId : ''
         }
         this.props.setUserProfileTC(userId)
         this.props.getProfileStatusTC(userId)
@@ -30,7 +31,8 @@ class ProfileContainer extends React.Component<CommonPropsType> {
     render() {
         // if (!this.props.isAuth) return <Redirect to={'/login'}/>
         return (
-            <Profile status={this.props.status} profile={this.props.profile} updateProfileStatus={this.props.updateProfileStatusTC}/>
+            <Profile status={this.props.status} profile={this.props.profile}
+                     updateProfileStatus={this.props.updateProfileStatusTC}/>
         );
     }
 }
@@ -38,7 +40,8 @@ class ProfileContainer extends React.Component<CommonPropsType> {
 const mapStateToProps = (state: AppStateType): MapStateType => ({
     profile: state.profilePage.profile,
     posts: state.profilePage.posts,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    userId: state.auth.id
 })
 
 
@@ -52,4 +55,8 @@ type PathParamsType = {
 
 // export default withRedirect(connect(mapStateToProps, {setUserProfileTC})(WithUrlDataContainerComponent));
 
-export default compose<ComponentType>(withRedirect,connect(mapStateToProps, {setUserProfileTC, getProfileStatusTC, updateProfileStatusTC}),withRouter)(ProfileContainer)
+export default compose<ComponentType>(withRedirect, connect(mapStateToProps, {
+    setUserProfileTC,
+    getProfileStatusTC,
+    updateProfileStatusTC
+}), withRouter)(ProfileContainer)

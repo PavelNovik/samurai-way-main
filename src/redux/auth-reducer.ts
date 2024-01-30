@@ -2,6 +2,7 @@ import {Dispatch} from "redux";
 import {authAPI} from "../api/auth-api";
 import {FormData} from "../components/Login/LoginForm";
 import {ThunkDispatch} from "redux-thunk";
+import {FormAction, stopSubmit} from "redux-form";
 
 
 export type AuthReducerStateType = {
@@ -45,14 +46,18 @@ export const setAuthUserDataTC = () => (dispatch: Dispatch) => {
             if (data.resultCode === 0) {
                 dispatch(setAuthUserData({...data.data, isAuth: true}))
             }
+
         }
     ).catch(e => console.log(e))
 }
 
-export const loginUserTC = (data: FormData) => (dispatch: ThunkDispatch<AuthReducerStateType, unknown, ActionType>) => {
+export const loginUserTC = (data: FormData) => (dispatch: ThunkDispatch<AuthReducerStateType, unknown, ActionType | FormAction>) => {
     authAPI.loginUser(data).then((data) => {
             if (data.resultCode === 0) {
                 dispatch(setAuthUserDataTC())
+            }
+            if (data.resultCode === 1) {
+                dispatch(stopSubmit('login', {_error: data.messages.length > 0 ? data.messages[0] : 'Some Error!'}))
             }
         }
     ).catch(e => console.log(e))
