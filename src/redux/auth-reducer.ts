@@ -42,11 +42,10 @@ export const setAuthUserData = ({id, login, email, isAuth}: AuthReducerStateType
 }
 
 export const setAuthUserDataTC = () => (dispatch: Dispatch) => {
-    authAPI.getAuthData().then((data) => {
+   return authAPI.getAuthData().then((data) => {
             if (data.resultCode === 0) {
                 dispatch(setAuthUserData({...data.data, isAuth: true}))
             }
-
         }
     ).catch(e => console.log(e))
 }
