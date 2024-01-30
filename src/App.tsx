@@ -1,7 +1,7 @@
 import React, {Component, ComponentType} from 'react';
 import './App.css';
 import Dialogs from "./components/Dialogs/Dialogs";
-import {Route, RouteComponentProps} from "react-router-dom";
+import {Redirect, Route, RouteComponentProps} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
