@@ -4,6 +4,7 @@ import {ProfilePropsType} from "../Profile";
 import {Preloader} from "../../common/Preloader/Preloader";
 import avatar from './../../../assets/img/pic6.jpg'
 import {ProfileStatus} from "../ProfileStatus/ProfileStatus";
+import {ProfileStatusFC} from "../ProfileStatus/ProfileStatusFC";
 
 const ProfileInfo = (props: ProfilePropsType) => {
 
@@ -29,7 +30,7 @@ const ProfileInfo = (props: ProfilePropsType) => {
             </div>
             <div className={s.profileInfoDescription}>
                 {!props.profile && <Preloader/>}
-                <ProfileStatus updateProfileStatus={props.updateProfileStatus} status={props.status}/>
+                <ProfileStatusFC updateProfileStatus={props.updateProfileStatus} status={props.status}/>
                 {userProfileInfo}
             </div>
         </div>
