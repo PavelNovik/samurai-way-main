@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 
 type Props = {
     status: string
@@ -9,6 +9,10 @@ export const ProfileStatusFC = (props: Props) => {
 
     const [editMode, setEditMode] = useState<boolean>(false)
     const [status, setStatus] = useState<string>(props.status)
+
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status]);
 
     const activateEditMode = () => {
         setEditMode(true)
@@ -24,13 +28,8 @@ export const ProfileStatusFC = (props: Props) => {
     }
 
     const onSubmitStatus = () => {
+        props.updateProfileStatus(status)
     }
-
-    // componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<typeof this.state>) {
-    //     if (prevProps.status !== this.props.status) {
-    //         this.setState({status: this.props.status})
-    //     }
-    // }
 
     return (
         <div>
