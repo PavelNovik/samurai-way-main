@@ -1,7 +1,7 @@
 import React, {Component, ComponentType} from 'react';
 import './App.css';
 import Dialogs from "./components/Dialogs/Dialogs";
-import {Redirect, Route, RouteComponentProps} from "react-router-dom";
+import {Route, RouteComponentProps} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -24,7 +24,7 @@ type MapDispatchProps = {
     initializeAppTC: () => void
 }
 type MapStateProps = {
-initialized: boolean
+    initialized: boolean
 }
 
 const mapStateToProps = (state: AppStateType): MapStateProps => ({
@@ -38,7 +38,7 @@ class App extends Component<CommonComponentType> {
     }
 
     render() {
-        if(!this.props.initialized) return <Preloader/>
+        if (!this.props.initialized) return <Preloader/>
 
         return (
 
