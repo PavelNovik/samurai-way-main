@@ -41,32 +41,38 @@ export const setAuthUserData = ({id, login, email, isAuth}: AuthReducerStateType
     } as const
 }
 
-export const setAuthUserDataTC = () => (dispatch: Dispatch) => {
-   return authAPI.getAuthData().then((data) => {
-            if (data.resultCode === 0) {
-                dispatch(setAuthUserData({...data.data, isAuth: true}))
-            }
+export const setAuthUserDataTC = () => async (dispatch: Dispatch) => {
+    try {
+        let data = await authAPI.getAuthData();
+        if (data.resultCode === 0) {
+            dispatch(setAuthUserData({...data.data, isAuth: true}))
         }
-    ).catch(e => console.log(e))
+    } catch (e) {
+        return console.log(e);
+    }
 }
 
-export const loginUserTC = (data: FormData) => (dispatch: ThunkDispatch<AuthReducerStateType, unknown, ActionType | FormAction>) => {
-    authAPI.loginUser(data).then((data) => {
-            if (data.resultCode === 0) {
-                dispatch(setAuthUserDataTC())
-            }
-            if (data.resultCode === 1) {
-                dispatch(stopSubmit('login', {_error: data.messages.length > 0 ? data.messages[0] : 'Some Error!'}))
-            }
+export const loginUserTC = (data: FormData) => async (dispatch: ThunkDispatch<AuthReducerStateType, unknown, ActionType | FormAction>) => {
+    try {
+        const res = await authAPI.loginUser(data)
+        if (res.resultCode === 0) {
+            dispatch(setAuthUserDataTC())
         }
-    ).catch(e => console.log(e))
+        if (res.resultCode === 1) {
+            dispatch(stopSubmit('login', {_error: res.messages.length > 0 ? res.messages[0] : 'Some Error!'}))
+        }
+    } catch (e) {
+        console.log(e)
+    }
 }
 
-export const logoutUserTC = () => (dispatch: Dispatch) => {
-    authAPI.logoutUser().then((data) => {
-            if (data.resultCode === 0) {
-                dispatch(setAuthUserData({id: null, login: null, email: null, isAuth: false}))
-            }
+export const logoutUserTC = () => async (dispatch: Dispatch) => {
+    try {
+        const res = await authAPI.logoutUser()
+        if (res.resultCode === 0) {
+            dispatch(setAuthUserData({id: null, login: null, email: null, isAuth: false}))
         }
-    ).catch(e => console.log(e))
+    } catch (e) {
+        console.log(e)
+    }
 }

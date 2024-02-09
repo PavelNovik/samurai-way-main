@@ -24,6 +24,7 @@ export const setInitialized = () => {
     } as const
 }
 
-export const initializeAppTC = () => (dispatch: ThunkDispatch<AppStateType, unknown, ActionType>) => {
-    dispatch(setAuthUserDataTC()).then(res => dispatch(setInitialized()))
+export const initializeAppTC = () => async (dispatch: ThunkDispatch<AppStateType, unknown, ActionType>) => {
+   const res = await dispatch(setAuthUserDataTC())
+    dispatch(setInitialized())
 }

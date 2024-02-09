@@ -35,16 +35,19 @@ export type UsersPagePropsType = MapStateType & MapDispatchType
 class UsersApi extends React.Component<UsersPagePropsType> {
 
     componentDidMount() {
-        this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.getUsersTC(currentPage, pageSize)
     }
 
     onPageChanged(page: number) {
-        this.props.changePageTC(page, this.props.pageSize)
+        const {pageSize} = this.props
+        this.props.changePageTC(page, pageSize)
     }
 
     onPageChangeButton() {
+        const {pageSize} = this.props
         const nextPage = this.props.currentPage + 1
-        this.props.changePageTC(nextPage, this.props.pageSize)
+        this.props.changePageTC(nextPage, pageSize)
     }
 
     render() {
