@@ -1,7 +1,9 @@
 .users {
     display: flex;
+    height: 100%;
     background-color: #fdc6fd;
     flex-direction: column;
+    align-items: center;
 }
 
 .users h2 {

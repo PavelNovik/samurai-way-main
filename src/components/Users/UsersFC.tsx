@@ -18,11 +18,7 @@ type UsersFCPropsType = {
     unfollowUserTC: (userId: string | number) => void
 }
 export const UsersFC = (props: UsersFCPropsType) => {
-    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-    const pages = []
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
+
 
     return (
         <div className={s.users}>
@@ -31,10 +27,10 @@ export const UsersFC = (props: UsersFCPropsType) => {
             <div className={s.usersContainer}>
                 {props.users.map(u => <User key={u.id} userData={u} followingInProgress={props.followingInProgress} unfollowUserTC={props.unfollowUserTC} followUserTC={props.followUserTC}/>)}
             </div>
-            <div className={s.usersAction}>
-                <button onClick={props.onPageChangeButton}>Show next</button>
-            </div>
-            <Paginator pages={pages} currentPage={props.currentPage} onPageChanged={props.onPageChanged}/>
+            {/*<div className={s.usersAction}>*/}
+            {/*    <button onClick={props.onPageChangeButton}>Show next</button>*/}
+            {/*</div>*/}
+            <Paginator totalUsersCount={props.totalUsersCount} pageSize={props.pageSize} currentPage={props.currentPage} onPageChanged={props.onPageChanged}/>
 
         </div>
     );
