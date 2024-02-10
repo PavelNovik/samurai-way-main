@@ -63,13 +63,19 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
         case "SET-PROFILE-STATUS": {
             return {...state, status: action.status}
         }
+        case "SAVE-PHOTO": {
+            return state.profile ? {
+                ...state,
+                profile: {...state.profile, photos: action.photos}
+            } : state
+        }
 
         default:
             return state
     }
 }
 
-export type ProfileActionType = AddPostACType | SetUserProfileType | SetProfileStatus | DeletePostAC
+export type ProfileActionType = AddPostACType | SetUserProfileType | SetProfileStatus | DeletePostAC | SavePhoto
 
 type AddPostACType = ReturnType<typeof addPostAC>
 export const addPostAC = (post: string) => {
@@ -103,6 +109,13 @@ export const setProfileStatus = (status: string) => {
         status
     } as const
 }
+export type SavePhoto = ReturnType<typeof savePhoto>
+export const savePhoto = (photos: { small: string, large: string }) => {
+    return {
+        type: 'SAVE-PHOTO',
+        photos
+    } as const
+}
 
 export const setUserProfileTC = (userId: string | number) => async (dispatch: Dispatch) => {
     const data = await profileAPI.getProfileUsers(userId)
@@ -117,5 +130,11 @@ export const updateProfileStatusTC = (status: string) => async (dispatch: Dispat
     const res = await profileAPI.updateProfileStatus(status)
     if (res.resultCode === 0) {
         dispatch(setProfileStatus(status))
+    }
+}
+export const updateProfilePhotoTC = (file: File) => async (dispatch: Dispatch) => {
+    const res = await profileAPI.savePhoto(file)
+    if (res.resultCode === 0) {
+        dispatch(savePhoto(res.data))
     }
 }

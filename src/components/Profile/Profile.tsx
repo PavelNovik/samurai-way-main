@@ -6,15 +6,19 @@ import {ProfileType} from "../../redux/profileReducer";
 
 
 export type ProfilePropsType = {
+    isOwner: boolean
     profile: ProfileType | null
     status: string
     updateProfileStatus: (status: string)=> void
+    updateProfilePhoto: (file: File)=> void
 }
 const Profile = (props: ProfilePropsType) => {
 
     return (
         <div className={styles.content}>
-            <ProfileInfo status={props.status} profile={props.profile} updateProfileStatus={props.updateProfileStatus} />
+            <ProfileInfo isOwner={props.isOwner} status={props.status} profile={props.profile} updateProfileStatus={props.updateProfileStatus}
+                         updateProfilePhoto={props.updateProfilePhoto}
+            />
             <MyPostsContainer/>
         </div>
     );

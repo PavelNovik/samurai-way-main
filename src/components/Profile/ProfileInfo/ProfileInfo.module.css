@@ -35,7 +35,11 @@
     padding: 10px;
 
     & img {
-        width: 200px;
+        /*width: 200px;*/
         /*border-radius: 50%;*/
     }
+}
+.mainPhoto {
+    max-width: 200px;
+    border-radius: 50%;
 }

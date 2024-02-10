@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./User.module.css";
 import {NavLink} from "react-router-dom";
-import pic4 from "../../../assets/img/pic4.jpg";
+import pic4 from "../../../assets/img/anonymous.webp";
 import {UserType} from "../../../redux/userReducer";
 
 type Props = {
