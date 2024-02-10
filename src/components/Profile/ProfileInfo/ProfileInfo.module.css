@@ -2,6 +2,35 @@
 
 }
 
+.profileUserData {
+    display: flex;
+    gap: 30px;
+}
+
+.profileUserDataInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    font-size: 20px;
+    font-style: italic;
+}
+.profileUserDataInfo span:first-child {
+    font-weight: bold;
+    font-style: normal;
+    font-size: 25px;
+}
+
+.profileUserDataContacts {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.profileUserData span {
+    /*border: 1px solid black;*/
+}
+
 .profileInfoDescription {
     padding: 10px;
 

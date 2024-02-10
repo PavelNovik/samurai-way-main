@@ -1,4 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
+import s from './ProfileStatusFC.module.css'
 
 type Props = {
     status: string
@@ -32,7 +33,7 @@ export const ProfileStatusFC = (props: Props) => {
     }
 
     return (
-        <div>
+        <div className={s.profileStatus}>
             {!editMode && <div onDoubleClick={activateEditMode}>
                 <span>{props.status || 'Enter you status'}</span>
             </div>}

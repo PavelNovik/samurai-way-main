@@ -7,17 +7,20 @@ import {ProfileStatusFC} from "../ProfileStatus/ProfileStatusFC";
 
 const ProfileInfo = (props: ProfilePropsType) => {
 
-    const userProfileInfo = props.profile ? <div>
+    const userProfileInfo = props.profile ? <div className={s.profileUserData}>
         <img alt={'profile'} src={props.profile.photos.large ? props.profile.photos.large : avatar}/>
-        <span>{props.profile.aboutMe}</span>
-        <span>{props.profile.fullName}</span>
-        <div>
-            <span>{props.profile.contacts.facebook}</span>
-            <span>{props.profile.contacts.instagram}</span>
-            <span>{props.profile.contacts.github}</span>
-            <span>{props.profile.contacts.vk}</span>
-            <span>{props.profile.contacts.youtube}</span>
-            <span>{props.profile.contacts.mainLink}</span>
+        <div className={s.profileUserDataInfo}>
+            <span>{props.profile.fullName || 'My full name'}</span>
+            <span>{props.profile.aboutMe || 'Who am I'}</span>
+        </div>
+
+        <div className={s.profileUserDataContacts}>
+            <span>{props.profile.contacts.facebook || 'facebook'}</span>
+            <span>{props.profile.contacts.instagram || 'instagram'}</span>
+            <span>{props.profile.contacts.github || 'github'}</span>
+            <span>{props.profile.contacts.vk || 'vk'}</span>
+            <span>{props.profile.contacts.youtube || 'youtube'}</span>
+            <span>{props.profile.contacts.mainLink || 'mainLink'}</span>
         </div>
     </div> : <></>
 
