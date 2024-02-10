@@ -7,14 +7,12 @@ import {PostDataT, PostReduxForm} from "./Post/PostForm";
 const MyPosts = memo((props: MyPostPropsType) => {
         let {posts, addNewPost} = props;
 
-        console.log('render')
 
 
         const postsList = posts.map(p => <Post key={p.id} message={p.message} likes={p.likes}/>)
 
         // const newPostElement = createRef<HTMLTextAreaElement>()
         const addNewPostHandler = (data: PostDataT) => {
-            console.log(data)
             addNewPost(data.post)
         }
 
