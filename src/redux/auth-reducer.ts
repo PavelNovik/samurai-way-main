@@ -27,9 +27,8 @@ const initialState: AuthReducerStateType = {
 export const authReducer = (state = initialState, action: ActionType): AuthReducerStateType => {
     switch (action.type) {
         case 'SET-USER-DATA':
-            return {...state, ...action.payload}
         case "SET-CAPTCHA":
-            return {...state, captcha: action.captchaUrl}
+            return {...state, ...action.payload}
         default:
             return state
     }
@@ -45,10 +44,11 @@ export const setAuthUserData = ({id, login, email, isAuth}: AuthReducerStateType
     } as const
 }
 type SetCaptcha = ReturnType<typeof setCaptcha>
-const setCaptcha = (captchaUrl: string)=> {
+const setCaptcha = (captcha: string) => {
+    const payload = {captcha}
     return {
         type: 'SET-CAPTCHA',
-        captchaUrl
+        payload
     } as const
 }
 
