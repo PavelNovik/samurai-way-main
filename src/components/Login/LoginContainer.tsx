@@ -7,6 +7,7 @@ import {AppStateType} from "../../redux/redux-store";
 export type LoginProps = MapDispatchProps & MapStateProps
 type MapStateProps = {
     isAuth: boolean
+    captcha?: string
 }
 type MapDispatchProps = {
     loginUserTC: (data: FormData)=> void
@@ -14,6 +15,7 @@ type MapDispatchProps = {
 }
 const mapStateToProps = (state: AppStateType): MapStateProps => {
     return {
+        captcha: state.auth.captcha,
         isAuth: state.auth.isAuth
     }
 }

@@ -13,7 +13,7 @@ export const Login = (props: LoginProps) => {
         <div>
             <h1>Login</h1>
 
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm captchaUrl={props.captcha} onSubmit={onSubmit}/>
 
         </div>
     );

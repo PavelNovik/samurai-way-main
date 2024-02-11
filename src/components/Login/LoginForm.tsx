@@ -6,9 +6,14 @@ import s from './LoginForm.module.css'
 export type FormData = {
     email: string
     password: string
-    remeberMe: boolean
+    rememberMe: boolean
+    captcha?: string | null
 }
-const LoginForm = (props: InjectedFormProps<FormData>) => {
+type Props = {
+    captchaUrl?: string
+}
+const LoginForm = (props: InjectedFormProps<FormData> & Props) => {
+
     return (
         <div>
             <form onSubmit={props.handleSubmit}>
@@ -23,6 +28,10 @@ const LoginForm = (props: InjectedFormProps<FormData>) => {
                 <div>
                     <Field name={'rememberMe'} component={'input'} type="checkbox"/> Remember me
                 </div>
+                <div>
+                    {props.captchaUrl && <img alt={'captcha'} src={props.captchaUrl}/>}
+                    {props.captchaUrl && <Field name={'captcha'} component={'input'} type="text"/>}
+                </div>
                 {props.error && <div className={s.formSumError}>{props.error}</div>}
                 <div>
                     <button>Login</button>
@@ -32,7 +41,7 @@ const LoginForm = (props: InjectedFormProps<FormData>) => {
     );
 };
 
-export const LoginReduxForm = reduxForm<FormData>({
+export const LoginReduxForm = reduxForm<FormData, Props>({
     // a unique name for the form
     form: 'login'
 })(LoginForm)
