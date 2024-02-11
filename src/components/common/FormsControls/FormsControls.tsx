@@ -5,7 +5,7 @@ import s from './FormControls.module.css'
 type FormControlT = {
     children: ReactNode
 }
-const FormControl = ({input, meta, children, ...props}: WrappedFieldProps & FormControlT) => {
+export const FormControl = ({input, meta, children, ...props}: WrappedFieldProps & FormControlT) => {
     const isError = meta.touched && meta.error
     return <div className={isError ? s.formControl + ' ' + s.error : s.formControl}>
         <div>
@@ -24,6 +24,7 @@ export const Input = (props: WrappedFieldProps) => {
     const {input, ...restProps} = props
     return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
 }
+
 
 // export const Textarea = ({input, meta, ...props}: WrappedFieldProps) => {
 //     const isError = meta.touched && meta.error
@@ -47,4 +48,29 @@ export const Input = (props: WrappedFieldProps) => {
 //             {isError && <span>{meta.error}</span>}
 //         </div>
 //     </div>
+// }
+
+// type CreateField<T> = {
+//     placeholder: string
+//     name: string
+//     validators: (val: string) => string | void
+//     component: ComponentType<T>
+//     props: T
+//     text: string
+// }
+// type Params = {
+//     placeholder: string
+//     name: string
+//     validators: (val: string) => string | void
+//     text: string
+//     component: any
+//     // props: WrappedFieldProps
+// }
+// export const createField = (params: Params, props: any) => {
+//     return (
+//         <div>
+//             <Field placeholder={params.placeholder} name={params.name} validate={params.validators} component={params.component} {...props} />
+//             {params.text}
+//         </div>
+//     )
 // }

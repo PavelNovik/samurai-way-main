@@ -1,6 +1,9 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/profile-api";
+import {ThunkDispatch} from "redux-thunk";
+import {AppStateType} from "./redux-store";
+import {FormAction, stopSubmit} from "redux-form";
 
 export type PostsType = {
     id: string
@@ -12,28 +15,30 @@ export type ProfilePageType = {
     profile: ProfileType | null
     status: string
 }
+export type ProfileContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+}
 
 export type ProfileType = {
     aboutMe: string
-    userId: number
+    userId: number | string
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
-    contacts: {
-        github: string
-        vk: string
-        facebook: string
-        instagram: string
-        twitter: string
-        website: string
-        youtube: string
-        mainLink: string
-    }
+    contacts: ProfileContactsType
     photos: {
         small: string
         large: string
     }
 }
+export type ProfileRequest = Omit<ProfileType, 'photos'>
 
 const initialState: ProfilePageType = {
     posts: [
@@ -136,5 +141,20 @@ export const updateProfilePhotoTC = (file: File) => async (dispatch: Dispatch) =
     const res = await profileAPI.savePhoto(file)
     if (res.resultCode === 0) {
         dispatch(savePhoto(res.data))
+    }
+}
+
+export const updateProfileTC = (profile: ProfileRequest, form: string) => async (dispatch: ThunkDispatch<AppStateType, unknown, SetUserProfileType | FormAction>) => {
+    const res = await profileAPI.updateProfile(profile)
+    if (res.resultCode === 0) {
+        await dispatch(setUserProfileTC(profile.userId))
+    }
+    if (res.resultCode === 1) {
+        if (form === 'profile') {
+            dispatch(stopSubmit('profile', {_error: res.messages.length > 0 ? res.messages[0] : 'Some Error!'}))
+        } else {
+            dispatch(stopSubmit('contacts', {_error: res.messages.length > 0 ? res.messages[0] : 'Some Error!'}))
+        }
+        return Promise.reject(res.messages[0])
     }
 }

@@ -3,10 +3,10 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
     getProfileStatusTC,
-    ProfilePageType,
+    ProfilePageType, ProfileRequest,
     setUserProfileTC,
     updateProfilePhotoTC,
-    updateProfileStatusTC
+    updateProfileStatusTC, updateProfileTC
 } from "../../redux/profileReducer";
 import {AppStateType} from "../../redux/redux-store";
 import {withRouter} from "react-router";
@@ -20,6 +20,7 @@ type MapDispatchType = {
     getProfileStatusTC: (userId: string | number) => void
     updateProfileStatusTC: (status: string) => void
     updateProfilePhotoTC: (file: File)=> void
+    updateProfileTC: (profile: ProfileRequest, form: string) => Promise<void>
 }
 type MapStateType = ProfilePageType & { userId: string | null }
 
@@ -51,6 +52,7 @@ class ProfileContainer extends React.Component<CommonPropsType> {
             <Profile isOwner={!this.props.match.params.userId} status={this.props.status} profile={this.props.profile}
                      updateProfileStatus={this.props.updateProfileStatusTC}
                      updateProfilePhoto={this.props.updateProfilePhotoTC}
+                     updateProfile={this.props.updateProfileTC}
             />
         );
     }
@@ -78,5 +80,5 @@ export default compose<ComponentType>(withRedirect, connect(mapStateToProps, {
     setUserProfileTC,
     getProfileStatusTC,
     updateProfileStatusTC,
-    updateProfilePhotoTC
+    updateProfilePhotoTC, updateProfileTC
 }), withRouter)(ProfileContainer)
