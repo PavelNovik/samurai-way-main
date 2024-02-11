@@ -12,7 +12,7 @@ export type AuthReducerStateType = {
     login: null | string
     isAuth: boolean
     captcha?: string
-    // isFetching: boolean
+    // isFetching: boolean | string
 }
 
 type ActionType = SetUserDataACType | SetCaptcha
@@ -22,7 +22,7 @@ const initialState: AuthReducerStateType = {
     email: null,
     login: null,
     isAuth: false
-    // isFetching: false
+    // isFetching: false || 'idle
 }
 export const authReducer = (state = initialState, action: ActionType): AuthReducerStateType => {
     switch (action.type) {
